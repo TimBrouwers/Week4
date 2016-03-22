@@ -36,6 +36,9 @@ namespace AnimalShelter
         private void createAnimalButton_Click(object sender, EventArgs e)
         {
             // TODO: See method description
+            SimpleDate dateOfBirth = new SimpleDate(23, 3, 2016);
+            MessageBox.Show(dateOfBirth.CompareTo(SimpleDate.Now()).ToString());
+            Console.Write("hallo rick");
 
             int chipregistationnr;
             try

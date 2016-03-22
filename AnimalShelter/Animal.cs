@@ -47,10 +47,23 @@ namespace AnimalShelter
             {
                 throw new NullReferenceException("Empty Textbox");
             }
-            
+            if (chipRegistrationNumber > 0)
+            {
                 ChipRegistrationNumber = chipRegistrationNumber;
+            }
+            else
+            {
+                throw new FormatException("Chipnumber wrong");
+            }
+
+            if (dateOfBirth != null && (dateOfBirth.CompareTo(SimpleDate.Now()) > 0))
+            {
                 DateOfBirth = dateOfBirth;
-                IsReserved = false;
+            } else
+            {
+                throw new FormatException("Date of birth is of the wrong type");
+            }
+            IsReserved = false;
         }
 
         /// <summary>
