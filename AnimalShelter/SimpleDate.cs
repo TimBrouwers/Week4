@@ -12,7 +12,7 @@ namespace AnimalShelter
     /// the .Net DateTime object. SimpleDate hides the more complex interface of DateTime
     /// and makes it easy to  work with dates only.
     /// </summary>
-    public class SimpleDate : IComparable
+    public class SimpleDate
     {
         private DateTime date;
 
@@ -62,9 +62,24 @@ namespace AnimalShelter
             return timespan.Days;
         }
 
-        public static SimpleDate Now()
+        public static int Compare(SimpleDate sd1, SimpleDate sd2)
         {
-            return new SimpleDate(DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year);
+            int result = 0;
+            if (sd1 != null && sd2 != null)
+            {
+                if (sd1.date <= sd2.date)
+                {
+                    result = 1;
+                }
+                else if (sd1.date > sd2.date)
+                {
+                    result = -1;
+                }
+            } else
+            {
+                throw new NullReferenceException("simpledate was null");
+            }
+            return result;
         }
 
         /// <summary>
@@ -77,11 +92,6 @@ namespace AnimalShelter
         public override string ToString()
         {
             return date.ToString("dd-MM-yyyy");
-        }
-
-        public int CompareTo(object obj)
-        {
-            return date.CompareTo(obj);
         }
     }
 }

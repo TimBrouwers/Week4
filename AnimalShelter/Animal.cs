@@ -56,12 +56,12 @@ namespace AnimalShelter
                 throw new FormatException("Chipnumber wrong");
             }
 
-            if (dateOfBirth != null && (dateOfBirth.CompareTo(SimpleDate.Now()) > 0))
+            if (dateOfBirth != null && SimpleDate.Compare(dateOfBirth, new SimpleDate(DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year)) > 0)
             {
                 DateOfBirth = dateOfBirth;
             } else
             {
-                throw new FormatException("Date of birth is of the wrong type");
+                throw new FormatException("Date of birth is of the wrong type or later than today");
             }
             IsReserved = false;
         }
