@@ -122,5 +122,15 @@ namespace AnimalShelter
                 dtpLastwalk.Visible = false;
             }
         }
+
+        private void btnAddToList_Click(object sender, EventArgs e)
+        {
+            Administration.Add(animal);
+        }
+
+        private void tbSearchWithChipnumber_TextChanged(object sender, EventArgs e)
+        {
+            Administration.FindAnimal(Int32.Parse(tbSearchWithChipnumber.Text));
+        }
     }
 }

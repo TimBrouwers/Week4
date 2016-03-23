@@ -47,8 +47,8 @@
             this.dtpLastwalk = new System.Windows.Forms.DateTimePicker();
             this.lvCats = new System.Windows.Forms.ListView();
             this.ChipnumberCat = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.NameCat = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.DateOfBirthCat = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.NameCat = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.IsReservedCat = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.BadhabitsCat = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvDogs = new System.Windows.Forms.ListView();
@@ -59,6 +59,12 @@
             this.LastWalkedDog = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.TXTCats = new System.Windows.Forms.Label();
             this.TXTDogs = new System.Windows.Forms.Label();
+            this.btnAddToList = new System.Windows.Forms.Button();
+            this.btnRemovefromList = new System.Windows.Forms.Button();
+            this.btnChangeReservedStatus = new System.Windows.Forms.Button();
+            this.BtnSearchAnimal = new System.Windows.Forms.Button();
+            this.tbSearchWithChipnumber = new System.Windows.Forms.TextBox();
+            this.TXTSearch = new System.Windows.Forms.Label();
             this.GBIsReserved.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -234,15 +240,15 @@
             // 
             this.ChipnumberCat.Text = "Chip number";
             // 
-            // NameCat
-            // 
-            this.NameCat.DisplayIndex = 1;
-            this.NameCat.Text = "Name";
-            // 
             // DateOfBirthCat
             // 
             this.DateOfBirthCat.DisplayIndex = 2;
             this.DateOfBirthCat.Text = "Birthday";
+            // 
+            // NameCat
+            // 
+            this.NameCat.DisplayIndex = 1;
+            this.NameCat.Text = "Name";
             // 
             // IsReservedCat
             // 
@@ -302,11 +308,71 @@
             this.TXTDogs.TabIndex = 17;
             this.TXTDogs.Text = "Dogs:";
             // 
+            // btnAddToList
+            // 
+            this.btnAddToList.Location = new System.Drawing.Point(290, 292);
+            this.btnAddToList.Name = "btnAddToList";
+            this.btnAddToList.Size = new System.Drawing.Size(75, 23);
+            this.btnAddToList.TabIndex = 18;
+            this.btnAddToList.Text = "Add";
+            this.btnAddToList.UseVisualStyleBackColor = true;
+            this.btnAddToList.Click += new System.EventHandler(this.btnAddToList_Click);
+            // 
+            // btnRemovefromList
+            // 
+            this.btnRemovefromList.Location = new System.Drawing.Point(371, 292);
+            this.btnRemovefromList.Name = "btnRemovefromList";
+            this.btnRemovefromList.Size = new System.Drawing.Size(75, 23);
+            this.btnRemovefromList.TabIndex = 19;
+            this.btnRemovefromList.Text = "Remove";
+            this.btnRemovefromList.UseVisualStyleBackColor = true;
+            // 
+            // btnChangeReservedStatus
+            // 
+            this.btnChangeReservedStatus.Location = new System.Drawing.Point(453, 292);
+            this.btnChangeReservedStatus.Name = "btnChangeReservedStatus";
+            this.btnChangeReservedStatus.Size = new System.Drawing.Size(132, 23);
+            this.btnChangeReservedStatus.TabIndex = 20;
+            this.btnChangeReservedStatus.Text = "Reserved Changed";
+            this.btnChangeReservedStatus.UseVisualStyleBackColor = true;
+            // 
+            // BtnSearchAnimal
+            // 
+            this.BtnSearchAnimal.Location = new System.Drawing.Point(12, 292);
+            this.BtnSearchAnimal.Name = "BtnSearchAnimal";
+            this.BtnSearchAnimal.Size = new System.Drawing.Size(75, 23);
+            this.BtnSearchAnimal.TabIndex = 21;
+            this.BtnSearchAnimal.Text = "Search";
+            this.BtnSearchAnimal.UseVisualStyleBackColor = true;
+            // 
+            // tbSearchWithChipnumber
+            // 
+            this.tbSearchWithChipnumber.Location = new System.Drawing.Point(12, 266);
+            this.tbSearchWithChipnumber.Name = "tbSearchWithChipnumber";
+            this.tbSearchWithChipnumber.Size = new System.Drawing.Size(178, 20);
+            this.tbSearchWithChipnumber.TabIndex = 22;
+            this.tbSearchWithChipnumber.TextChanged += new System.EventHandler(this.tbSearchWithChipnumber_TextChanged);
+            // 
+            // TXTSearch
+            // 
+            this.TXTSearch.AutoSize = true;
+            this.TXTSearch.Location = new System.Drawing.Point(15, 247);
+            this.TXTSearch.Name = "TXTSearch";
+            this.TXTSearch.Size = new System.Drawing.Size(111, 13);
+            this.TXTSearch.TabIndex = 23;
+            this.TXTSearch.Text = "Search: (Chipnummer)";
+            // 
             // AdministrationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(598, 327);
+            this.Controls.Add(this.TXTSearch);
+            this.Controls.Add(this.tbSearchWithChipnumber);
+            this.Controls.Add(this.BtnSearchAnimal);
+            this.Controls.Add(this.btnChangeReservedStatus);
+            this.Controls.Add(this.btnRemovefromList);
+            this.Controls.Add(this.btnAddToList);
             this.Controls.Add(this.TXTDogs);
             this.Controls.Add(this.TXTCats);
             this.Controls.Add(this.lvDogs);
@@ -368,6 +434,12 @@
         private System.Windows.Forms.ColumnHeader LastWalkedDog;
         private System.Windows.Forms.Label TXTCats;
         private System.Windows.Forms.Label TXTDogs;
+        private System.Windows.Forms.Button btnAddToList;
+        private System.Windows.Forms.Button btnRemovefromList;
+        private System.Windows.Forms.Button btnChangeReservedStatus;
+        private System.Windows.Forms.Button BtnSearchAnimal;
+        private System.Windows.Forms.TextBox tbSearchWithChipnumber;
+        private System.Windows.Forms.Label TXTSearch;
     }
 }
 
