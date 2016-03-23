@@ -15,6 +15,7 @@ namespace AnimalShelter
         /// The (only) animal in this administration (for now....)
         /// </summary>
         private Animal animal;
+        Administration administration = new Administration();
 
         /// <summary>
         /// Creates the form for doing adminstrative tasks
@@ -125,12 +126,12 @@ namespace AnimalShelter
 
         private void btnAddToList_Click(object sender, EventArgs e)
         {
-            Administration.Add(animal);
+            administration.Add(animal);
         }
 
-        private void tbSearchWithChipnumber_TextChanged(object sender, EventArgs e)
+        private void BtnSearchAnimal_Click(object sender, EventArgs e)
         {
-            Administration.FindAnimal(Int32.Parse(tbSearchWithChipnumber.Text));
+            administration.FindAnimal(Int32.Parse(tbSearchWithChipnumber.Text));
         }
     }
 }

@@ -14,18 +14,29 @@ namespace AnimalShelter
 
         public bool Add(Animal animal)
         {
-            bool ReturnValue = true;
-            animals.Add(animal);
-            return ReturnValue;
+            if (animal != null)
+            {
+                animals.Add(animal);
+                return true;
+            }
+            return false;
         }
 
         public bool RemoveAnimal(int chipRegistrationNumber)
         {
-
-            return;
+            Animal animalToRemove = null;
+            foreach (Animal animal in animals)
+            {
+                if (animal.ChipRegistrationNumber == chipRegistrationNumber)
+                {
+                    animalToRemove = animal;
+                    break;
+                }
+            }
+            return animals.Remove(animalToRemove);
         }
 
-        public static Animal FindAnimal(int chipRegistrationNumber)
+        public Animal FindAnimal(int chipRegistrationNumber)
         {
             Animal foundAnimal = null;
 

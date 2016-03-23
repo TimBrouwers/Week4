@@ -344,6 +344,7 @@
             this.BtnSearchAnimal.TabIndex = 21;
             this.BtnSearchAnimal.Text = "Search";
             this.BtnSearchAnimal.UseVisualStyleBackColor = true;
+            this.BtnSearchAnimal.Click += new System.EventHandler(this.BtnSearchAnimal_Click);
             // 
             // tbSearchWithChipnumber
             // 
@@ -351,7 +352,6 @@
             this.tbSearchWithChipnumber.Name = "tbSearchWithChipnumber";
             this.tbSearchWithChipnumber.Size = new System.Drawing.Size(178, 20);
             this.tbSearchWithChipnumber.TabIndex = 22;
-            this.tbSearchWithChipnumber.TextChanged += new System.EventHandler(this.tbSearchWithChipnumber_TextChanged);
             // 
             // TXTSearch
             // 
