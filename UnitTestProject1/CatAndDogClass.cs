@@ -49,10 +49,12 @@ namespace AnimalShelterTest
         public void CatObjectCreationWithInvalidBirthDate()
         {
             SimpleDate invalidDateOfBirth;
-            DateTime now = DateTime.Now;
-            DateTime oneDayAfterNow = now.AddDays(1);
+            DateTime now, oneDayAfterNow;
+            Cat cat;
+            now = DateTime.Now;
+            oneDayAfterNow = now.AddDays(1);
             invalidDateOfBirth = new SimpleDate(oneDayAfterNow.Day, oneDayAfterNow.Month, oneDayAfterNow.Year);
-            Cat cat = new Cat(chipNumber, dateOfBirth, name, badHabits);
+            cat = new Cat(chipNumber, invalidDateOfBirth, name, badHabits);
 
             Assert.AreEqual(chipNumber, cat.ChipRegistrationNumber);
             Assert.AreEqual(badHabits, cat.BadHabits);
@@ -64,24 +66,27 @@ namespace AnimalShelterTest
         [ExpectedException(typeof(FormatException))]
         public void InvalidchipNumberCat()
         {
-            int chipNumber = -1;
+            int invalidChipNumber;
+            invalidChipNumber = -1;
 
-            Cat cat = new Cat(chipNumber, dateOfBirth, name, badHabits);
+            Cat cat = new Cat(invalidChipNumber, dateOfBirth, name, badHabits);
         }
         public void InvalidchipNumberDog()
         {
-            int chipNumber = -1;
+            int invalidChipNumber;
+            invalidChipNumber = -1;
 
-            Dog dog = new Dog(chipNumber, dateOfBirth, name, lastWalkDate);
+            Dog dog = new Dog(invalidChipNumber, dateOfBirth, name, lastWalkDate);
         }
 
         [TestMethod]
         [ExpectedException(typeof(NullReferenceException))]
         public void NoNameGiven()
         {
-            name = string.Empty;
+            string invalidName;
+            invalidName = string.Empty;
 
-            Cat cat = new Cat(chipNumber, dateOfBirth, name, badHabits);
+            Cat cat = new Cat(chipNumber, dateOfBirth, invalidName, badHabits);
         }
     }
 }
