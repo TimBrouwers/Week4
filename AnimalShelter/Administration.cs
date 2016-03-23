@@ -5,12 +5,15 @@ using System.Text;
 
 namespace AnimalShelter
 {
-    class Administration
+    public class Administration
     {
-        private List<Animal> animals = new List<Animal>();
+        public List<Animal> animals { get; private set; }
+
 
         public Administration()
-        { }
+        {
+            animals = new List<Animal>();
+        }
 
         public bool Add(Animal animal)
         {

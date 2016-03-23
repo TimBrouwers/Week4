@@ -10,6 +10,8 @@ namespace AnimalShelter
     /// </summary>
     public class Animal
     {
+        private static List<int> chipNumbers = new List<int>();
+        
         /// <summary>
         /// The chipnumber of the animal. Must be unique. Must be zero or greater than zero.
         /// </summary>
@@ -45,7 +47,7 @@ namespace AnimalShelter
             }
             else
             {
-                throw new NullReferenceException("Empty Textbox");
+                throw new WrongInputException("Empty Textbox");
             }
             if (chipRegistrationNumber > 0)
             {
@@ -53,7 +55,7 @@ namespace AnimalShelter
             }
             else
             {
-                throw new FormatException("Chipnumber wrong");
+                throw new WrongInputException("Chipnumber wrong");
             }
 
             if (dateOfBirth != null && SimpleDate.Compare(dateOfBirth, new SimpleDate(DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year)) > 0)
@@ -61,9 +63,19 @@ namespace AnimalShelter
                 DateOfBirth = dateOfBirth;
             } else
             {
-                throw new FormatException("Date of birth is of the wrong type or later than today");
+                throw new WrongInputException("Date of birth is of the wrong type or later than today");
             }
             IsReserved = false;
+
+            //all steps were succesful, so we can add the chipnumber to the list
+            foreach (int chipNumber in chipNumbers)
+            {
+                if (chipNumber == chipRegistrationNumber)
+                {
+                    throw new ExistingChipNumberException("This chipnumber already exists");
+                }
+            }
+            chipNumbers.Add(chipRegistrationNumber);
         }
 
         /// <summary>

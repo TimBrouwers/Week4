@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -16,6 +17,7 @@ namespace AnimalShelter
         /// </summary>
         private Animal animal;
         Administration administration = new Administration();
+        private List<Animal> animals;
 
         /// <summary>
         /// Creates the form for doing adminstrative tasks
@@ -25,7 +27,10 @@ namespace AnimalShelter
             InitializeComponent();
             animalTypeComboBox.SelectedIndex = 0;
             animal = null;
+            animals = administration.animals;
         }
+
+
 
         /// <summary>
         /// Create an Animal object and store it in the administration.
@@ -36,60 +41,57 @@ namespace AnimalShelter
         /// <param name="e"></param>
         private void createAnimalButton_Click(object sender, EventArgs e)
         {
-            // TODO: See method description
             int chipregistationnr;
             try
             {
                 if (Int32.TryParse(tbChipregistrationNr.Text, out chipregistationnr))
                 {
-                    if (animalTypeComboBox.SelectedItem.ToString() == "Dog")
+                    switch (animalTypeComboBox.SelectedItem.ToString())
                     {
-                        DateTime Birthdate = dtpBirthdate.Value;
-                        DateTime LastWalk = dtpLastwalk.Value;
-                        animal = new Dog(Convert.ToInt32(tbChipregistrationNr.Text),
-                            new SimpleDate(Birthdate.Day, Birthdate.Month, Birthdate.Year),
-                            tbName.Text,
-                            new SimpleDate(LastWalk.Day, LastWalk.Month, LastWalk.Year));
-                        if (rbIsReservedYes.Checked)
-                        {
-                            animal.IsReserved = true;
-                        }
-                        else
-                        {
-                            animal.IsReserved = false;
-                        }
-                    }
-                    else if (animalTypeComboBox.SelectedItem.ToString() == "Cat")
-                    {
-                        DateTime Birthdate = dtpBirthdate.Value;
-                        DateTime LastWalk = dtpLastwalk.Value;
-                        animal = new Cat(Convert.ToInt32(tbChipregistrationNr.Text),
-                            new SimpleDate(Birthdate.Day, Birthdate.Month, Birthdate.Year),
-                            tbName.Text,
-                            tbBadhabits.Text);
-                        if (rbIsReservedYes.Checked)
-                        {
-                            animal.IsReserved = true;
-                        }
-                        else
-                        {
-                            animal.IsReserved = false;
-                        }
-                    }
-                    else
-                    {
-                        throw new FormatException("fa;lfaslfas");
+                        case "Dog":
+                            {
+                                DateTime Birthdate = dtpBirthdate.Value;
+                                DateTime LastWalk = dtpLastwalk.Value;
+                                animal = new Dog(Convert.ToInt32(tbChipregistrationNr.Text),
+                                    new SimpleDate(Birthdate.Day, Birthdate.Month, Birthdate.Year),
+                                    tbName.Text,
+                                    new SimpleDate(LastWalk.Day, LastWalk.Month, LastWalk.Year));
+                                animal.IsReserved = rbIsReservedYes.Checked;
+                                administration.Add(animal);
+                            }
+                            break;
+                        case "Cat":
+                            {
+                                DateTime Birthdate = dtpBirthdate.Value;
+                                animal = new Cat(Convert.ToInt32(tbChipregistrationNr.Text),
+                                    new SimpleDate(Birthdate.Day, Birthdate.Month, Birthdate.Year),
+                                    tbName.Text,
+                                    tbBadhabits.Text);
+                                animal.IsReserved = rbIsReservedYes.Checked;
+                                administration.Add(animal);
+                            }
+                            break;
+                        default:
+                            throw new NotImplementedException("animal is not known");
                     }
                 }
                 else
                 {
-                    throw new FormatException("input wrong");
+                    throw new WrongInputException("chipnumber not right");
                 }
             }
-            catch (FormatException ex)
+            catch (WrongInputException wie)
             {
-                MessageBox.Show(ex.Message, "Error");
+                MessageBox.Show(wie.Message, "Error");
             }
+            catch (ExistingChipNumberException ecne)
+            {
+                MessageBox.Show(ecne.Message, "Error");
+            }
+
+
+
+            PutAllShitBackInListBox();
         }
 
         /// <summary>
@@ -108,30 +110,80 @@ namespace AnimalShelter
 
         private void animalTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (animalTypeComboBox.SelectedItem.ToString() == "Dog")
+            switch (animalTypeComboBox.SelectedItem.ToString())
             {
-                TXTLastWalk.Visible = true;
-                dtpLastwalk.Visible = true;
-                TXTBadhabits.Visible = false;
-                tbBadhabits.Visible = false;
-            }
-            else if (animalTypeComboBox.SelectedItem.ToString() == "Cat")
-            {
-                TXTBadhabits.Visible = true;
-                tbBadhabits.Visible = true;
-                TXTLastWalk.Visible = false;
-                dtpLastwalk.Visible = false;
+                case "Dog":
+                    TXTLastWalk.Visible = true;
+                    dtpLastwalk.Visible = true;
+                    TXTBadhabits.Visible = false;
+                    tbBadhabits.Visible = false;
+                    break;
+                case "Cat":
+                    TXTBadhabits.Visible = true;
+                    tbBadhabits.Visible = true;
+                    TXTLastWalk.Visible = false;
+                    dtpLastwalk.Visible = false;
+                    break;
+                default:
+                    throw new NotImplementedException();
+                    break;
             }
         }
 
-        private void btnAddToList_Click(object sender, EventArgs e)
+        private void tbSearchWithChipnumber_TextChanged(object sender, EventArgs e)
         {
-            administration.Add(animal);
+            int chipnummer;
+            Animal foundAnimal = null;
+            string chipNumberText = tbSearchWithChipnumber.Text;
+            if (int.TryParse(chipNumberText, out chipnummer))
+            {
+                foundAnimal = administration.FindAnimal(chipnummer);
+            }
+
+            lbAnimals.Items.Clear();
+            if (foundAnimal != null)
+            {
+                lbAnimals.Items.Add(foundAnimal);
+            }
+            else if (String.IsNullOrWhiteSpace(chipNumberText))
+            {
+                PutAllShitBackInListBox();
+            }
         }
 
-        private void BtnSearchAnimal_Click(object sender, EventArgs e)
+        private void btnChangeReservedStatus_Click(object sender, EventArgs e)
         {
-            administration.FindAnimal(Int32.Parse(tbSearchWithChipnumber.Text));
+            if (lbAnimals.SelectedItem != null)
+            {
+                Animal selectedAnimal = (Animal)lbAnimals.SelectedItem;
+                selectedAnimal.IsReserved = !selectedAnimal.IsReserved;
+            }
+            PutAllShitBackInListBox();
+        }
+
+        private void PutAllShitBackInListBox()
+        {
+            lbAnimals.Items.Clear();
+            lbAnimals.Items.AddRange(animals.ToArray());
+        }
+
+        private void btnRemovefromList_Click(object sender, EventArgs e)
+        {
+            int counter = 0;
+            foreach (var an in animals)
+            {
+                
+                if (an == lbAnimals.SelectedItem)
+                {
+                    break;
+                }
+                counter++;
+            }
+            if (animals.Count > 0)
+            {
+                animals.RemoveAt(counter);
+            }
+            PutAllShitBackInListBox();
         }
     }
 }
