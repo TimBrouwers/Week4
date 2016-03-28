@@ -112,6 +112,7 @@ namespace AnimalShelter
                           + ", " + DateOfBirth
                           + ", " + Name
                           + ", " + IsReservedString
+                          + ", " + "€" + Price
                           + ", ";
             return info;
         }
