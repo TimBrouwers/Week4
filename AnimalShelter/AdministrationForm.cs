@@ -45,7 +45,7 @@ namespace AnimalShelter
                     {
                         case "Dog":
                             {
-                                
+
                                 DateTime LastWalk = dtpLastwalk.Value;
                                 animal = new Dog(Convert.ToInt32(tbChipregistrationNr.Text),
                                     new SimpleDate(Birthdate.Day, Birthdate.Month, Birthdate.Year),
@@ -168,12 +168,13 @@ namespace AnimalShelter
             if (lbNotReserved.SelectedItem != null)
             {
                 selectedAnimal = (Animal)lbNotReserved.SelectedItem;
-            } else if (lbReserved.SelectedItem != null)
-            {
-                selectedAnimal = (Animal) lbReserved.SelectedItem;
             }
-            
-            
+            else if (lbReserved.SelectedItem != null)
+            {
+                selectedAnimal = (Animal)lbReserved.SelectedItem;
+            }
+
+
             if (selectedAnimal != null)
             {
                 foreach (var an in administration.animals)
@@ -191,13 +192,13 @@ namespace AnimalShelter
                     administration.animals.RemoveAt(counter);
                 }
             }
-            
+
             RedrawItemsInAnimalListBoxes();
         }
 
         private void lbReserved_SelectedIndexChanged(object sender, EventArgs e)
         {
-                lbNotReserved.SelectedItem = null;
+            lbNotReserved.SelectedItem = null;
         }
 
         private void lbNotReserved_SelectedIndexChanged(object sender, EventArgs e)
@@ -210,14 +211,8 @@ namespace AnimalShelter
             administration.Add(new Cat(1, new SimpleDate(11, 3, 2010), "yaro", "everything"));
             administration.Add(new Dog(2, new SimpleDate(1, 11, 2014), "doggy", null));
             administration.animals[1].IsReserved = true;
-            try
-            {
-                administration.Add(new Cat(15, new SimpleDate(15, 3, 2015), "visstick", null));
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message, e.StackTrace);
-            }
+            administration.Add(new Cat(15, new SimpleDate(15, 3, 2015), "visstick", null));
+
         }
     }
 }
