@@ -80,6 +80,10 @@ namespace AnimalShelterTest
 
             _cat = new Cat(invalidChipNumber, _dateOfBirth, _name, _badHabits);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(WrongInputException))]
+
         public void InvalidchipNumberDog()
         {
             int invalidChipNumber = -1;
