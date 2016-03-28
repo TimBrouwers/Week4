@@ -196,16 +196,6 @@ namespace AnimalShelter
             RedrawItemsInAnimalListBoxes();
         }
 
-        private void lbReserved_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            lbNotReserved.SelectedItem = null;
-        }
-
-        private void lbNotReserved_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            lbReserved.SelectedItem = null;
-        }
-
         private void AddTestAnimals()
         {
             administration.Add(new Cat(1, new SimpleDate(11, 3, 2010), "yaro", "everything"));
@@ -213,6 +203,16 @@ namespace AnimalShelter
             administration.animals[1].IsReserved = true;
             administration.Add(new Cat(15, new SimpleDate(15, 3, 2015), "visstick", null));
             administration.Add(new Dog(50001, new SimpleDate(19, 7, 2015), "bark", new SimpleDate(16, 9, 2015)));
+        }
+
+        private void lbNotReserved_MouseClick(object sender, MouseEventArgs e)
+        {
+            lbReserved.SelectedItem = null;
+        }
+
+        private void lbReserved_MouseClick(object sender, MouseEventArgs e)
+        {
+            lbNotReserved.SelectedItem = null;
         }
     }
 }

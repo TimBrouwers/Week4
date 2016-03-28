@@ -44,7 +44,7 @@
             this.tbBadhabits = new System.Windows.Forms.TextBox();
             this.TXTLastWalk = new System.Windows.Forms.Label();
             this.dtpLastwalk = new System.Windows.Forms.DateTimePicker();
-            this.TXTAnimals = new System.Windows.Forms.Label();
+            this.TXTReserved = new System.Windows.Forms.Label();
             this.btnRemovefromList = new System.Windows.Forms.Button();
             this.btnChangeToReserved = new System.Windows.Forms.Button();
             this.tbSearchWithChipnumber = new System.Windows.Forms.TextBox();
@@ -53,6 +53,7 @@
             this.lbNotReserved = new System.Windows.Forms.ListBox();
             this.btnChangeToNotReserved = new System.Windows.Forms.Button();
             this.lbFound = new System.Windows.Forms.ListBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.GBIsReserved.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -200,14 +201,14 @@
             this.dtpLastwalk.Size = new System.Drawing.Size(200, 20);
             this.dtpLastwalk.TabIndex = 13;
             // 
-            // TXTAnimals
+            // TXTReserved
             // 
-            this.TXTAnimals.AutoSize = true;
-            this.TXTAnimals.Location = new System.Drawing.Point(291, 20);
-            this.TXTAnimals.Name = "TXTAnimals";
-            this.TXTAnimals.Size = new System.Drawing.Size(46, 13);
-            this.TXTAnimals.TabIndex = 16;
-            this.TXTAnimals.Text = "Animals:";
+            this.TXTReserved.AutoSize = true;
+            this.TXTReserved.Location = new System.Drawing.Point(291, 20);
+            this.TXTReserved.Name = "TXTReserved";
+            this.TXTReserved.Size = new System.Drawing.Size(56, 13);
+            this.TXTReserved.TabIndex = 16;
+            this.TXTReserved.Text = "Reserved:";
             // 
             // btnRemovefromList
             // 
@@ -253,7 +254,7 @@
             this.lbReserved.Name = "lbReserved";
             this.lbReserved.Size = new System.Drawing.Size(301, 251);
             this.lbReserved.TabIndex = 25;
-            this.lbReserved.SelectedIndexChanged += new System.EventHandler(this.lbReserved_SelectedIndexChanged);
+            this.lbReserved.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lbReserved_MouseClick);
             // 
             // lbNotReserved
             // 
@@ -262,7 +263,7 @@
             this.lbNotReserved.Name = "lbNotReserved";
             this.lbNotReserved.Size = new System.Drawing.Size(264, 251);
             this.lbNotReserved.TabIndex = 26;
-            this.lbNotReserved.SelectedIndexChanged += new System.EventHandler(this.lbNotReserved_SelectedIndexChanged);
+            this.lbNotReserved.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lbNotReserved_MouseClick);
             // 
             // btnChangeToNotReserved
             // 
@@ -282,11 +283,21 @@
             this.lbFound.Size = new System.Drawing.Size(242, 186);
             this.lbFound.TabIndex = 28;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(690, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(71, 13);
+            this.label1.TabIndex = 29;
+            this.label1.Text = "Not reserved:";
+            // 
             // AdministrationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(969, 516);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.lbFound);
             this.Controls.Add(this.btnChangeToNotReserved);
             this.Controls.Add(this.lbNotReserved);
@@ -295,7 +306,7 @@
             this.Controls.Add(this.tbSearchWithChipnumber);
             this.Controls.Add(this.btnChangeToReserved);
             this.Controls.Add(this.btnRemovefromList);
-            this.Controls.Add(this.TXTAnimals);
+            this.Controls.Add(this.TXTReserved);
             this.Controls.Add(this.dtpLastwalk);
             this.Controls.Add(this.TXTLastWalk);
             this.Controls.Add(this.tbBadhabits);
@@ -337,7 +348,7 @@
         private System.Windows.Forms.TextBox tbBadhabits;
         private System.Windows.Forms.Label TXTLastWalk;
         private System.Windows.Forms.DateTimePicker dtpLastwalk;
-        private System.Windows.Forms.Label TXTAnimals;
+        private System.Windows.Forms.Label TXTReserved;
         private System.Windows.Forms.Button btnRemovefromList;
         private System.Windows.Forms.Button btnChangeToReserved;
         private System.Windows.Forms.TextBox tbSearchWithChipnumber;
@@ -346,6 +357,7 @@
         private System.Windows.Forms.ListBox lbNotReserved;
         private System.Windows.Forms.Button btnChangeToNotReserved;
         private System.Windows.Forms.ListBox lbFound;
+        private System.Windows.Forms.Label label1;
     }
 }
 
