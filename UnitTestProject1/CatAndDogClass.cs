@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using AnimalShelter;
 
@@ -9,7 +10,7 @@ namespace AnimalShelterTest
     {
         private readonly SimpleDate _lastWalkDate;
         private readonly SimpleDate _dateOfBirth;
-        private readonly int _chipNumber;
+        private int _chipNumber;
         private readonly string _name;
         private readonly string _badHabits;
         private Dog _dog;
@@ -29,7 +30,20 @@ namespace AnimalShelterTest
         [TestInitialize]
         public void InitializeTest()
         {
-            //might use this eventually?
+            Animal.chipNumbers = new List<int>(); //delete the old list from the previous test
+        }
+
+
+
+        [TestMethod]
+        public void CatObjectCreation()
+        {
+            _cat = new Cat(_chipNumber, _dateOfBirth, _name, _badHabits);
+
+            Assert.AreEqual(_chipNumber, _cat.ChipRegistrationNumber);
+            Assert.AreEqual(_badHabits, _cat.BadHabits);
+            Assert.AreEqual(_dateOfBirth, _cat.DateOfBirth);
+            Assert.AreEqual(_name, _cat.Name);
         }
 
         [TestMethod]
@@ -44,18 +58,7 @@ namespace AnimalShelterTest
         }
 
         [TestMethod]
-        public void CatObjectCreation()
-        {
-            _cat = new Cat(_chipNumber, _dateOfBirth, _name, _badHabits);
-
-            Assert.AreEqual(_chipNumber, _cat.ChipRegistrationNumber);
-            Assert.AreEqual(_badHabits, _cat.BadHabits);
-            Assert.AreEqual(_dateOfBirth, _cat.DateOfBirth);
-            Assert.AreEqual(_name, _cat.Name);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(FormatException))]
+        [ExpectedException(typeof(WrongInputException))]
         public void CatObjectCreationWithInvalidBirthDate()
         {
             DateTime now = DateTime.Now;
@@ -70,7 +73,7 @@ namespace AnimalShelterTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(FormatException))]
+        [ExpectedException(typeof(WrongInputException))]
         public void InvalidchipNumberCat()
         {
             int invalidChipNumber = -1;

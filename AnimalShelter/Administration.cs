@@ -9,7 +9,6 @@ namespace AnimalShelter
     {
         public List<Animal> animals { get; private set; }
 
-
         public Administration()
         {
             animals = new List<Animal>();
