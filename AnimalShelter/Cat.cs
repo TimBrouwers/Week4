@@ -18,7 +18,11 @@ namespace AnimalShelter
             get
             {
                 int price = 60;
-                price = price - BadHabits.Length;
+                if (BadHabits != null)
+                {
+                    price = price - BadHabits.Length;
+                }
+
                 if (price < 20)
                 {
                     price = 20;
@@ -39,8 +43,7 @@ namespace AnimalShelter
         public Cat(int chipRegistrationNumber, SimpleDate dateOfBirth,
                    string name, string badHabits) : base(chipRegistrationNumber, dateOfBirth, name)
         {
-            // TODO: Modify the constructor. Make sure it initializes all properties of the class.
-            BadHabits = badHabits;
+                BadHabits = badHabits;
         }
 
         /// <summary>

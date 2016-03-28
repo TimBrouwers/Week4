@@ -21,6 +21,8 @@ namespace AnimalShelter
         {
             InitializeComponent();
             animalTypeComboBox.SelectedIndex = 0;
+            AddTestAnimals();
+            RedrawItemsInAnimalListBoxes();
         }
 
         /// <summary>
@@ -196,6 +198,26 @@ namespace AnimalShelter
         private void lbReserved_SelectedIndexChanged(object sender, EventArgs e)
         {
                 lbNotReserved.SelectedItem = null;
+        }
+
+        private void lbNotReserved_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            lbReserved.SelectedItem = null;
+        }
+
+        private void AddTestAnimals()
+        {
+            administration.Add(new Cat(1, new SimpleDate(11, 3, 2010), "yaro", "everything"));
+            administration.Add(new Dog(2, new SimpleDate(1, 11, 2014), "doggy", null));
+            administration.animals[1].IsReserved = true;
+            try
+            {
+                administration.Add(new Cat(15, new SimpleDate(15, 3, 2015), "visstick", null));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message, e.StackTrace);
+            }
         }
     }
 }

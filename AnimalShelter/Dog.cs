@@ -39,7 +39,7 @@ namespace AnimalShelter
                 {
                     price = 350;
                 }
-                return Price;
+                return price;
             }
         }
 
@@ -57,6 +57,7 @@ namespace AnimalShelter
         /// </returns>
         public override string ToString()
         {
+            string info;
             string LastWalk;
             if(LastWalkDate == null)
             {
@@ -66,8 +67,8 @@ namespace AnimalShelter
             {
                 LastWalk = LastWalkDate.ToString();
             }
-
-            return "Dog: " + base.ToString() + LastWalk;
+            info = "Dog: " + base.ToString() + LastWalk;
+            return info;
         }
     }
 }

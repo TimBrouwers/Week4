@@ -221,7 +221,7 @@
             // 
             // btnChangeToReserved
             // 
-            this.btnChangeToReserved.Location = new System.Drawing.Point(420, 105);
+            this.btnChangeToReserved.Location = new System.Drawing.Point(601, 109);
             this.btnChangeToReserved.Name = "btnChangeToReserved";
             this.btnChangeToReserved.Size = new System.Drawing.Size(86, 23);
             this.btnChangeToReserved.TabIndex = 20;
@@ -251,21 +251,22 @@
             this.lbReserved.FormattingEnabled = true;
             this.lbReserved.Location = new System.Drawing.Point(294, 39);
             this.lbReserved.Name = "lbReserved";
-            this.lbReserved.Size = new System.Drawing.Size(120, 251);
+            this.lbReserved.Size = new System.Drawing.Size(301, 251);
             this.lbReserved.TabIndex = 25;
             this.lbReserved.SelectedIndexChanged += new System.EventHandler(this.lbReserved_SelectedIndexChanged);
             // 
             // lbNotReserved
             // 
             this.lbNotReserved.FormattingEnabled = true;
-            this.lbNotReserved.Location = new System.Drawing.Point(512, 39);
+            this.lbNotReserved.Location = new System.Drawing.Point(693, 39);
             this.lbNotReserved.Name = "lbNotReserved";
-            this.lbNotReserved.Size = new System.Drawing.Size(120, 251);
+            this.lbNotReserved.Size = new System.Drawing.Size(264, 251);
             this.lbNotReserved.TabIndex = 26;
+            this.lbNotReserved.SelectedIndexChanged += new System.EventHandler(this.lbNotReserved_SelectedIndexChanged);
             // 
             // btnChangeToNotReserved
             // 
-            this.btnChangeToNotReserved.Location = new System.Drawing.Point(420, 134);
+            this.btnChangeToNotReserved.Location = new System.Drawing.Point(601, 138);
             this.btnChangeToNotReserved.Name = "btnChangeToNotReserved";
             this.btnChangeToNotReserved.Size = new System.Drawing.Size(86, 23);
             this.btnChangeToNotReserved.TabIndex = 27;
@@ -278,7 +279,7 @@
             this.lbFound.FormattingEnabled = true;
             this.lbFound.Location = new System.Drawing.Point(12, 310);
             this.lbFound.Name = "lbFound";
-            this.lbFound.Size = new System.Drawing.Size(120, 95);
+            this.lbFound.Size = new System.Drawing.Size(242, 186);
             this.lbFound.TabIndex = 28;
             // 
             // AdministrationForm
