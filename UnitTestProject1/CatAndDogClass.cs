@@ -145,6 +145,14 @@ namespace AnimalShelterTest
         }
 
         [TestMethod]
+        public void PriceTestCatUnder20()
+        {
+            Cat testCatPrice = new Cat(4, new SimpleDate(1, 2, 2011), "name", "The price should be very low after I fill his bad behaviour really long but I don't know when it is long enough...");
+
+            Assert.IsFalse(testCatPrice.Price < 20);
+            Assert.IsTrue(testCatPrice.Price == 60 - testCatPrice.BadHabits.Length || testCatPrice.Price == 20);
+        }
+        [TestMethod]
         public void PriceTestDog()
         {
             Dog testDogPrice = new Dog(4, new SimpleDate(1, 2, 2011), "name", new SimpleDate(29, 1, 2011));

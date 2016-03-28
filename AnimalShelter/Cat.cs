@@ -17,9 +17,10 @@ namespace AnimalShelter
         {
             get
             {
-                int price = 60;
+                int price = 0;
                 if (BadHabits != null)
                 {
+                    price = 60;
                     price = price - BadHabits.Length;
                 }
 
