@@ -162,7 +162,16 @@ namespace AnimalShelter
         private void btnRemovefromList_Click(object sender, EventArgs e)
         {
             int counter = 0;
-            Animal selectedAnimal = (Animal) lbAnimals.SelectedItem;
+            Animal selectedAnimal = null;
+            if (lbNotReserved.SelectedItem != null)
+            {
+                selectedAnimal = (Animal)lbNotReserved.SelectedItem;
+            } else if (lbReserved.SelectedItem != null)
+            {
+                selectedAnimal = (Animal) lbReserved.SelectedItem;
+            }
+            
+            
             if (selectedAnimal != null)
             {
                 foreach (var an in administration.animals)
