@@ -2,7 +2,7 @@
 
 namespace AnimalShelter
 {
-    class ExistingChipNumberException : Exception
+    public class ExistingChipNumberException : Exception
     {
         public ExistingChipNumberException()
         {
@@ -18,7 +18,7 @@ namespace AnimalShelter
 
     }
 
-    class WrongInputException : Exception
+    public class WrongInputException : Exception
     {
         public WrongInputException()
         {

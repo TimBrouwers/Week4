@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
+//using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -146,19 +146,25 @@ namespace AnimalShelter
         private void btnRemovefromList_Click(object sender, EventArgs e)
         {
             int counter = 0;
-            foreach (var an in administration.animals)
+            Animal selectedAnimal = (Animal) lbAnimals.SelectedItem;
+            if (selectedAnimal != null)
             {
-                
-                if (an == lbAnimals.SelectedItem)
+                foreach (var an in administration.animals)
                 {
-                    break;
+                    if (an == selectedAnimal)
+                    {
+                        break;
+                    }
+                    counter++;
                 }
-                counter++;
+
+                if (administration.animals.Count > 0)
+                {
+                    Animal.chipNumbers.Remove(selectedAnimal.ChipRegistrationNumber);
+                    administration.animals.RemoveAt(counter);
+                }
             }
-            if (administration.animals.Count > 0)
-            {
-                administration.animals.RemoveAt(counter);
-            }   
+            
             PutAllShitBackInListBox();
         }
     }

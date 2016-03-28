@@ -85,7 +85,7 @@ namespace AnimalShelterTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NullReferenceException))]
+        [ExpectedException(typeof(WrongInputException))]
         public void NoNameGiven()
         {
             string invalidName = string.Empty;

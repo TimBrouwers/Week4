@@ -10,8 +10,8 @@ namespace AnimalShelter
     /// </summary>
     public class Animal
     {
-        private static List<int> chipNumbers = new List<int>();
-        
+        public static List<int> chipNumbers { get; set; }
+
         /// <summary>
         /// The chipnumber of the animal. Must be unique. Must be zero or greater than zero.
         /// </summary>
@@ -39,6 +39,10 @@ namespace AnimalShelter
         ///                                      Must be unique. Must be zero or greater than zero.</param>
         /// <param name="dateOfBirth">The date of birth of the animal.</param>
         /// <param name="name">The name of the animal.</param>
+        static Animal()
+        {
+            chipNumbers = new List<int>();
+        }
         public Animal(int chipRegistrationNumber, SimpleDate dateOfBirth, string name)
         {
             if (!string.IsNullOrWhiteSpace(name))
@@ -61,7 +65,8 @@ namespace AnimalShelter
             if (dateOfBirth != null && SimpleDate.Compare(dateOfBirth, new SimpleDate(DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year)) > 0)
             {
                 DateOfBirth = dateOfBirth;
-            } else
+            }
+            else
             {
                 throw new WrongInputException("Date of birth is of the wrong type or later than today");
             }
