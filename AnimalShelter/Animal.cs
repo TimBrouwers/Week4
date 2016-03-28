@@ -53,7 +53,7 @@ namespace AnimalShelter
             }
             else
             {
-                throw new WrongInputException("Empty Textbox");
+                throw new WrongInputException("Invalid name");
             }
             if (chipRegistrationNumber > 0)
             {

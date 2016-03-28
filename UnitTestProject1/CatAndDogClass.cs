@@ -33,7 +33,26 @@ namespace AnimalShelterTest
             Animal.ChipNumbers = new List<int>(); //delete the old list from the previous test
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(WrongInputException))]
+        public void NoNameCat()
+        {
+            _cat = new Cat(_chipNumber, _dateOfBirth, null, _badHabits);
+        }
 
+        [TestMethod]
+        [ExpectedException(typeof(WrongInputException))]
+        public void NoNameDog()
+        {
+            _dog = new Dog(_chipNumber, _dateOfBirth, null, null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(WrongInputException))]
+        public void NoChipNumber()
+        {
+            _cat = new Cat(0, _dateOfBirth, _name, _badHabits);
+        }
 
         [TestMethod]
         public void CatObjectCreation()
