@@ -8,7 +8,7 @@ namespace AnimalShelter
     /// <summary>
     /// Class representing an animal in the shelter.
     /// </summary>
-    public class Animal
+    public  abstract class Animal
     {
         public static List<int> chipNumbers { get; set; }
 

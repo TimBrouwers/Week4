@@ -81,7 +81,7 @@ namespace AnimalShelter
 
 
 
-            PutAllShitBackInListBox();
+            RedrawItemsInAnimalListBox();
         }
 
         private void animalTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -123,7 +123,7 @@ namespace AnimalShelter
             }
             else if (String.IsNullOrWhiteSpace(chipNumberText))
             {
-                PutAllShitBackInListBox();
+                RedrawItemsInAnimalListBox();
             }
         }
 
@@ -134,10 +134,10 @@ namespace AnimalShelter
                 Animal selectedAnimal = (Animal)lbAnimals.SelectedItem;
                 selectedAnimal.IsReserved = !selectedAnimal.IsReserved;
             }
-            PutAllShitBackInListBox();
+            RedrawItemsInAnimalListBox();
         }
 
-        private void PutAllShitBackInListBox()
+        private void RedrawItemsInAnimalListBox()
         {
             lbAnimals.Items.Clear();
             lbAnimals.Items.AddRange(administration.animals.ToArray());
@@ -165,7 +165,7 @@ namespace AnimalShelter
                 }
             }
             
-            PutAllShitBackInListBox();
+            RedrawItemsInAnimalListBox();
         }
     }
 }
