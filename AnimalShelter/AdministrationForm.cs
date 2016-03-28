@@ -212,7 +212,7 @@ namespace AnimalShelter
             administration.Add(new Dog(2, new SimpleDate(1, 11, 2014), "doggy", null));
             administration.animals[1].IsReserved = true;
             administration.Add(new Cat(15, new SimpleDate(15, 3, 2015), "visstick", null));
-
+            administration.Add(new Dog(50001, new SimpleDate(19, 7, 2015), "bark", new SimpleDate(16, 9, 2015)));
         }
     }
 }
