@@ -13,7 +13,6 @@ namespace AnimalShelter
     public partial class AdministrationForm : Form
     {
         Administration administration = new Administration();
-        private List<Animal> animals;
 
         /// <summary>
         /// Creates the form for doing adminstrative tasks
@@ -22,10 +21,7 @@ namespace AnimalShelter
         {
             InitializeComponent();
             animalTypeComboBox.SelectedIndex = 0;
-            animals = administration.animals;
         }
-
-
 
         /// <summary>
         /// Create an Animal object and store it in the administration.
@@ -61,7 +57,6 @@ namespace AnimalShelter
                                     new SimpleDate(Birthdate.Day, Birthdate.Month, Birthdate.Year),
                                     tbName.Text,
                                     tbBadhabits.Text);
-
                             }
                             break;
                         default:
@@ -145,13 +140,13 @@ namespace AnimalShelter
         private void PutAllShitBackInListBox()
         {
             lbAnimals.Items.Clear();
-            lbAnimals.Items.AddRange(animals.ToArray());
+            lbAnimals.Items.AddRange(administration.animals.ToArray());
         }
 
         private void btnRemovefromList_Click(object sender, EventArgs e)
         {
             int counter = 0;
-            foreach (var an in animals)
+            foreach (var an in administration.animals)
             {
                 
                 if (an == lbAnimals.SelectedItem)
@@ -160,10 +155,10 @@ namespace AnimalShelter
                 }
                 counter++;
             }
-            if (animals.Count > 0)
+            if (administration.animals.Count > 0)
             {
-                animals.RemoveAt(counter);
-            }
+                administration.animals.RemoveAt(counter);
+            }   
             PutAllShitBackInListBox();
         }
     }
