@@ -97,11 +97,42 @@ namespace AnimalShelterTest
         }
 
         [TestMethod]
-        public void ToStringTest()
+        public void ToStringTestCat()
         {
-            Cat testCat = new Cat(3, new SimpleDate(1, 2, 2011), "name", "none" );
+            Cat testCat = new Cat(3, new SimpleDate(1, 2, 2011), "name", "none");
             string expected = "Cat: 3, 01-02-2011, name, not reserved, none";
             Assert.AreEqual(expected, testCat.ToString());
+        }
+
+        [TestMethod]
+        public void ToStringTestDog()
+        {
+            Dog testDog = new Dog(4, new SimpleDate(1, 2, 2011), "name", new SimpleDate(29, 1, 2011));
+            string expected = "Cat: 3, 01-02-2011, name, not reserved, 29-01-2011";
+            Assert.AreEqual(expected, testDog.ToString());
+        }
+
+        [TestMethod]
+        public void PriceTestCat()
+        {
+            Cat testCatPrice = new Cat(4, new SimpleDate(1, 2, 2011), "name", "none");
+
+            Assert.IsFalse(testCatPrice.Price < 20);
+            Assert.IsTrue(testCatPrice.Price == 60 - testCatPrice.BadHabits.Length || testCatPrice.Price == 20);
+        }
+
+        [TestMethod]
+        public void PriceTestDag()
+        {
+            Dog testDogPrice = new Dog(4, new SimpleDate(1, 2, 2011), "name", new SimpleDate(29, 1, 2011));
+            if (testDogPrice.ChipRegistrationNumber >= 50000)
+            {
+                Assert.IsTrue(testDogPrice.Price == 350);
+            }
+            else
+            {
+                Assert.IsTrue(testDogPrice.Price == 200);
+            }
         }
     }
 }
