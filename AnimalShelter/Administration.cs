@@ -16,12 +16,12 @@ namespace AnimalShelter
 
         public bool Add(Animal animal)
         {
-            if (animal != null)
+            if (animal == null)
             {
-                animals.Add(animal);
-                return true;
+                return false;
             }
-            return false;
+            animals.Add(animal);
+            return true;
         }
 
         public bool RemoveAnimal(int chipRegistrationNumber)

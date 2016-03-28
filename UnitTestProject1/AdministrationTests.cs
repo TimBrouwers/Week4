@@ -2,7 +2,7 @@
 using AnimalShelter;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+//using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -40,10 +40,25 @@ namespace AnimalShelter.Tests
         }
 
         [TestMethod()]
+        public void AddTestFail()
+        {
+            administration.Add(null);
+            Assert.IsFalse(administration.animals.Contains(testAnimal));
+        }
+
+        [TestMethod()]
         public void RemoveAnimalTest()
         {
             administration.Add(testAnimal);
             Assert.IsTrue(administration.RemoveAnimal(testAnimal.ChipRegistrationNumber));
+            Assert.IsFalse(administration.animals.Contains(testAnimal));
+        }
+
+        [TestMethod]
+        public void RemoveAnimalTestFail()
+        {
+            administration.Add(null);
+            Assert.IsFalse(administration.RemoveAnimal(testAnimal.ChipRegistrationNumber));
         }
 
         [TestMethod()]
