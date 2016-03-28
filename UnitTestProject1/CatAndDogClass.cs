@@ -12,8 +12,8 @@ namespace AnimalShelterTest
         private readonly int _chipNumber;
         private readonly string _name;
         private readonly string _badHabits;
-        private Dog dog;
-        private Cat cat;
+        private Dog _dog;
+        private Cat _cat;
 
         public CatAndDogClass()
         {
@@ -22,8 +22,8 @@ namespace AnimalShelterTest
             _chipNumber = 1;
             _name = "test";
             _badHabits = "does not do anything, walks away from humans";
-            dog = null;
-            cat = null;
+            _dog = null;
+            _cat = null;
         }
 
         [TestInitialize]
@@ -35,23 +35,23 @@ namespace AnimalShelterTest
         [TestMethod]
         public void DogObjectCreation()
         {
-            dog = new Dog(_chipNumber, _dateOfBirth, _name, _lastWalkDate);
+            _dog = new Dog(_chipNumber, _dateOfBirth, _name, _lastWalkDate);
 
-            Assert.AreEqual(_chipNumber, dog.ChipRegistrationNumber);
-            Assert.AreEqual(_lastWalkDate, dog.LastWalkDate);
-            Assert.AreEqual(_dateOfBirth, dog.DateOfBirth);
-            Assert.AreEqual(_name, dog.Name);
+            Assert.AreEqual(_chipNumber, _dog.ChipRegistrationNumber);
+            Assert.AreEqual(_lastWalkDate, _dog.LastWalkDate);
+            Assert.AreEqual(_dateOfBirth, _dog.DateOfBirth);
+            Assert.AreEqual(_name, _dog.Name);
         }
 
         [TestMethod]
         public void CatObjectCreation()
         {
-            cat = new Cat(_chipNumber, _dateOfBirth, _name, _badHabits);
+            _cat = new Cat(_chipNumber, _dateOfBirth, _name, _badHabits);
 
-            Assert.AreEqual(_chipNumber, cat.ChipRegistrationNumber);
-            Assert.AreEqual(_badHabits, cat.BadHabits);
-            Assert.AreEqual(_dateOfBirth, cat.DateOfBirth);
-            Assert.AreEqual(_name, cat.Name);
+            Assert.AreEqual(_chipNumber, _cat.ChipRegistrationNumber);
+            Assert.AreEqual(_badHabits, _cat.BadHabits);
+            Assert.AreEqual(_dateOfBirth, _cat.DateOfBirth);
+            Assert.AreEqual(_name, _cat.Name);
         }
 
         [TestMethod]
@@ -61,12 +61,12 @@ namespace AnimalShelterTest
             DateTime now = DateTime.Now;
             DateTime oneDayAfterNow = now.AddDays(1);
             SimpleDate invalidDateOfBirth = new SimpleDate(oneDayAfterNow.Day, oneDayAfterNow.Month, oneDayAfterNow.Year);
-            cat = new Cat(_chipNumber, invalidDateOfBirth, _name, _badHabits);
+            _cat = new Cat(_chipNumber, invalidDateOfBirth, _name, _badHabits);
 
-            Assert.AreEqual(_chipNumber, cat.ChipRegistrationNumber);
-            Assert.AreEqual(_badHabits, cat.BadHabits);
-            Assert.AreEqual(_dateOfBirth, cat.DateOfBirth);
-            Assert.AreEqual(_name, cat.Name);
+            Assert.AreEqual(_chipNumber, _cat.ChipRegistrationNumber);
+            Assert.AreEqual(_badHabits, _cat.BadHabits);
+            Assert.AreEqual(_dateOfBirth, _cat.DateOfBirth);
+            Assert.AreEqual(_name, _cat.Name);
         }
 
         [TestMethod]
@@ -75,13 +75,13 @@ namespace AnimalShelterTest
         {
             int invalidChipNumber = -1;
 
-            cat = new Cat(invalidChipNumber, _dateOfBirth, _name, _badHabits);
+            _cat = new Cat(invalidChipNumber, _dateOfBirth, _name, _badHabits);
         }
         public void InvalidchipNumberDog()
         {
             int invalidChipNumber = -1;
 
-            dog = new Dog(invalidChipNumber, _dateOfBirth, _name, _lastWalkDate);
+            _dog = new Dog(invalidChipNumber, _dateOfBirth, _name, _lastWalkDate);
         }
 
         [TestMethod]
@@ -90,7 +90,7 @@ namespace AnimalShelterTest
         {
             string invalidName = string.Empty;
 
-            cat = new Cat(_chipNumber, _dateOfBirth, invalidName, _badHabits);
+            _cat = new Cat(_chipNumber, _dateOfBirth, invalidName, _badHabits);
         }
     }
 }

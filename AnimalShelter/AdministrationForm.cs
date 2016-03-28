@@ -12,10 +12,6 @@ namespace AnimalShelter
 {
     public partial class AdministrationForm : Form
     {
-        /// <summary>
-        /// The (only) animal in this administration (for now....)
-        /// </summary>
-        private Animal animal;
         Administration administration = new Administration();
         private List<Animal> animals;
 
@@ -26,7 +22,6 @@ namespace AnimalShelter
         {
             InitializeComponent();
             animalTypeComboBox.SelectedIndex = 0;
-            animal = null;
             animals = administration.animals;
         }
 
@@ -46,34 +41,34 @@ namespace AnimalShelter
             {
                 if (Int32.TryParse(tbChipregistrationNr.Text, out chipregistationnr))
                 {
+                    DateTime Birthdate = dtpBirthdate.Value;
+                    Animal animal = null;
                     switch (animalTypeComboBox.SelectedItem.ToString())
                     {
                         case "Dog":
                             {
-                                DateTime Birthdate = dtpBirthdate.Value;
+                                
                                 DateTime LastWalk = dtpLastwalk.Value;
                                 animal = new Dog(Convert.ToInt32(tbChipregistrationNr.Text),
                                     new SimpleDate(Birthdate.Day, Birthdate.Month, Birthdate.Year),
                                     tbName.Text,
                                     new SimpleDate(LastWalk.Day, LastWalk.Month, LastWalk.Year));
-                                animal.IsReserved = rbIsReservedYes.Checked;
-                                administration.Add(animal);
                             }
                             break;
                         case "Cat":
                             {
-                                DateTime Birthdate = dtpBirthdate.Value;
                                 animal = new Cat(Convert.ToInt32(tbChipregistrationNr.Text),
                                     new SimpleDate(Birthdate.Day, Birthdate.Month, Birthdate.Year),
                                     tbName.Text,
                                     tbBadhabits.Text);
-                                animal.IsReserved = rbIsReservedYes.Checked;
-                                administration.Add(animal);
+
                             }
                             break;
                         default:
                             throw new NotImplementedException("animal is not known");
                     }
+                    animal.IsReserved = rbIsReservedYes.Checked;
+                    administration.Add(animal);
                 }
                 else
                 {
@@ -92,20 +87,6 @@ namespace AnimalShelter
 
 
             PutAllShitBackInListBox();
-        }
-
-        /// <summary>
-        /// Show the info of the animal referenced by the 'animal' field. 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void showInfoButton_Click(object sender, EventArgs e)
-        {
-            // TODO: See method description
-            if (animal != null)
-            {
-                MessageBox.Show(animal.ToString());
-            }
         }
 
         private void animalTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)

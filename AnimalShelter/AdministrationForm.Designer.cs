@@ -30,7 +30,6 @@
         {
             this.animalTypeComboBox = new System.Windows.Forms.ComboBox();
             this.createAnimalButton = new System.Windows.Forms.Button();
-            this.showInfoButton = new System.Windows.Forms.Button();
             this.tbName = new System.Windows.Forms.TextBox();
             this.tbChipregistrationNr = new System.Windows.Forms.TextBox();
             this.dtpBirthdate = new System.Windows.Forms.DateTimePicker();
@@ -76,16 +75,6 @@
             this.createAnimalButton.Text = "Create";
             this.createAnimalButton.UseVisualStyleBackColor = true;
             this.createAnimalButton.Click += new System.EventHandler(this.createAnimalButton_Click);
-            // 
-            // showInfoButton
-            // 
-            this.showInfoButton.Location = new System.Drawing.Point(209, 10);
-            this.showInfoButton.Name = "showInfoButton";
-            this.showInfoButton.Size = new System.Drawing.Size(75, 23);
-            this.showInfoButton.TabIndex = 2;
-            this.showInfoButton.Text = "Show info";
-            this.showInfoButton.UseVisualStyleBackColor = true;
-            this.showInfoButton.Click += new System.EventHandler(this.showInfoButton_Click);
             // 
             // tbName
             // 
@@ -285,7 +274,6 @@
             this.Controls.Add(this.dtpBirthdate);
             this.Controls.Add(this.tbChipregistrationNr);
             this.Controls.Add(this.tbName);
-            this.Controls.Add(this.showInfoButton);
             this.Controls.Add(this.createAnimalButton);
             this.Controls.Add(this.animalTypeComboBox);
             this.Name = "AdministrationForm";
@@ -301,7 +289,6 @@
 
         private System.Windows.Forms.ComboBox animalTypeComboBox;
         private System.Windows.Forms.Button createAnimalButton;
-        private System.Windows.Forms.Button showInfoButton;
         private System.Windows.Forms.TextBox tbName;
         private System.Windows.Forms.TextBox tbChipregistrationNr;
         private System.Windows.Forms.DateTimePicker dtpBirthdate;
