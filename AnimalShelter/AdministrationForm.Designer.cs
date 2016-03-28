@@ -46,10 +46,13 @@
             this.dtpLastwalk = new System.Windows.Forms.DateTimePicker();
             this.TXTAnimals = new System.Windows.Forms.Label();
             this.btnRemovefromList = new System.Windows.Forms.Button();
-            this.btnChangeReservedStatus = new System.Windows.Forms.Button();
+            this.btnChangeToReserved = new System.Windows.Forms.Button();
             this.tbSearchWithChipnumber = new System.Windows.Forms.TextBox();
             this.TXTSearch = new System.Windows.Forms.Label();
-            this.lbAnimals = new System.Windows.Forms.ListBox();
+            this.lbReserved = new System.Windows.Forms.ListBox();
+            this.lbNotReserved = new System.Windows.Forms.ListBox();
+            this.btnChangeToNotReserved = new System.Windows.Forms.Button();
+            this.lbFound = new System.Windows.Forms.ListBox();
             this.GBIsReserved.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -208,7 +211,7 @@
             // 
             // btnRemovefromList
             // 
-            this.btnRemovefromList.Location = new System.Drawing.Point(290, 292);
+            this.btnRemovefromList.Location = new System.Drawing.Point(369, 296);
             this.btnRemovefromList.Name = "btnRemovefromList";
             this.btnRemovefromList.Size = new System.Drawing.Size(166, 23);
             this.btnRemovefromList.TabIndex = 19;
@@ -216,15 +219,15 @@
             this.btnRemovefromList.UseVisualStyleBackColor = true;
             this.btnRemovefromList.Click += new System.EventHandler(this.btnRemovefromList_Click);
             // 
-            // btnChangeReservedStatus
+            // btnChangeToReserved
             // 
-            this.btnChangeReservedStatus.Location = new System.Drawing.Point(462, 292);
-            this.btnChangeReservedStatus.Name = "btnChangeReservedStatus";
-            this.btnChangeReservedStatus.Size = new System.Drawing.Size(170, 23);
-            this.btnChangeReservedStatus.TabIndex = 20;
-            this.btnChangeReservedStatus.Text = "Reserved Changed";
-            this.btnChangeReservedStatus.UseVisualStyleBackColor = true;
-            this.btnChangeReservedStatus.Click += new System.EventHandler(this.btnChangeReservedStatus_Click);
+            this.btnChangeToReserved.Location = new System.Drawing.Point(420, 105);
+            this.btnChangeToReserved.Name = "btnChangeToReserved";
+            this.btnChangeToReserved.Size = new System.Drawing.Size(86, 23);
+            this.btnChangeToReserved.TabIndex = 20;
+            this.btnChangeToReserved.Text = "<=";
+            this.btnChangeToReserved.UseVisualStyleBackColor = true;
+            this.btnChangeToReserved.Click += new System.EventHandler(this.btnChangeToReserved_Click);
             // 
             // tbSearchWithChipnumber
             // 
@@ -243,23 +246,53 @@
             this.TXTSearch.TabIndex = 23;
             this.TXTSearch.Text = "Search: (Chipnumber)";
             // 
-            // lbAnimals
+            // lbReserved
             // 
-            this.lbAnimals.FormattingEnabled = true;
-            this.lbAnimals.Location = new System.Drawing.Point(290, 39);
-            this.lbAnimals.Name = "lbAnimals";
-            this.lbAnimals.Size = new System.Drawing.Size(342, 251);
-            this.lbAnimals.TabIndex = 24;
+            this.lbReserved.FormattingEnabled = true;
+            this.lbReserved.Location = new System.Drawing.Point(294, 39);
+            this.lbReserved.Name = "lbReserved";
+            this.lbReserved.Size = new System.Drawing.Size(120, 251);
+            this.lbReserved.TabIndex = 25;
+            this.lbReserved.SelectedIndexChanged += new System.EventHandler(this.lbReserved_SelectedIndexChanged);
+            // 
+            // lbNotReserved
+            // 
+            this.lbNotReserved.FormattingEnabled = true;
+            this.lbNotReserved.Location = new System.Drawing.Point(512, 39);
+            this.lbNotReserved.Name = "lbNotReserved";
+            this.lbNotReserved.Size = new System.Drawing.Size(120, 251);
+            this.lbNotReserved.TabIndex = 26;
+            // 
+            // btnChangeToNotReserved
+            // 
+            this.btnChangeToNotReserved.Location = new System.Drawing.Point(420, 134);
+            this.btnChangeToNotReserved.Name = "btnChangeToNotReserved";
+            this.btnChangeToNotReserved.Size = new System.Drawing.Size(86, 23);
+            this.btnChangeToNotReserved.TabIndex = 27;
+            this.btnChangeToNotReserved.Text = "=>";
+            this.btnChangeToNotReserved.UseVisualStyleBackColor = true;
+            this.btnChangeToNotReserved.Click += new System.EventHandler(this.btnChangeToNotReserved_Click);
+            // 
+            // lbFound
+            // 
+            this.lbFound.FormattingEnabled = true;
+            this.lbFound.Location = new System.Drawing.Point(12, 310);
+            this.lbFound.Name = "lbFound";
+            this.lbFound.Size = new System.Drawing.Size(120, 95);
+            this.lbFound.TabIndex = 28;
             // 
             // AdministrationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(644, 327);
-            this.Controls.Add(this.lbAnimals);
+            this.ClientSize = new System.Drawing.Size(969, 516);
+            this.Controls.Add(this.lbFound);
+            this.Controls.Add(this.btnChangeToNotReserved);
+            this.Controls.Add(this.lbNotReserved);
+            this.Controls.Add(this.lbReserved);
             this.Controls.Add(this.TXTSearch);
             this.Controls.Add(this.tbSearchWithChipnumber);
-            this.Controls.Add(this.btnChangeReservedStatus);
+            this.Controls.Add(this.btnChangeToReserved);
             this.Controls.Add(this.btnRemovefromList);
             this.Controls.Add(this.TXTAnimals);
             this.Controls.Add(this.dtpLastwalk);
@@ -305,10 +338,13 @@
         private System.Windows.Forms.DateTimePicker dtpLastwalk;
         private System.Windows.Forms.Label TXTAnimals;
         private System.Windows.Forms.Button btnRemovefromList;
-        private System.Windows.Forms.Button btnChangeReservedStatus;
+        private System.Windows.Forms.Button btnChangeToReserved;
         private System.Windows.Forms.TextBox tbSearchWithChipnumber;
         private System.Windows.Forms.Label TXTSearch;
-        private System.Windows.Forms.ListBox lbAnimals;
+        private System.Windows.Forms.ListBox lbReserved;
+        private System.Windows.Forms.ListBox lbNotReserved;
+        private System.Windows.Forms.Button btnChangeToNotReserved;
+        private System.Windows.Forms.ListBox lbFound;
     }
 }
 

@@ -8,10 +8,11 @@ namespace AnimalShelter
     /// <summary>
     /// Class representing an animal in the shelter.
     /// </summary>
-    public  abstract class Animal
+    public abstract class Animal : ISellable
     {
-        public static List<int> chipNumbers { get; set; }
+        public static List<int> ChipNumbers { get; set; }
 
+        public abstract decimal Price { get; }
         /// <summary>
         /// The chipnumber of the animal. Must be unique. Must be zero or greater than zero.
         /// </summary>
@@ -41,8 +42,9 @@ namespace AnimalShelter
         /// <param name="name">The name of the animal.</param>
         static Animal()
         {
-            chipNumbers = new List<int>();
+            ChipNumbers = new List<int>();
         }
+
         public Animal(int chipRegistrationNumber, SimpleDate dateOfBirth, string name)
         {
             if (!string.IsNullOrWhiteSpace(name))
@@ -73,14 +75,14 @@ namespace AnimalShelter
             IsReserved = false;
 
             //all steps were succesful, so we can add the chipnumber to the list
-            foreach (int chipNumber in chipNumbers)
+            foreach (int chipNumber in ChipNumbers)
             {
                 if (chipNumber == chipRegistrationNumber)
                 {
                     throw new ExistingChipNumberException("This chipnumber already exists");
                 }
             }
-            chipNumbers.Add(chipRegistrationNumber);
+            ChipNumbers.Add(chipRegistrationNumber);
         }
 
         /// <summary>

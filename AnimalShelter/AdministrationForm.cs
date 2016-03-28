@@ -12,7 +12,7 @@ namespace AnimalShelter
 {
     public partial class AdministrationForm : Form
     {
-        Administration administration = new Administration();
+        private readonly Administration administration = new Administration();
 
         /// <summary>
         /// Creates the form for doing adminstrative tasks
@@ -32,9 +32,9 @@ namespace AnimalShelter
         /// <param name="e"></param>
         private void createAnimalButton_Click(object sender, EventArgs e)
         {
-            int chipregistationnr;
             try
             {
+                int chipregistationnr;
                 if (Int32.TryParse(tbChipregistrationNr.Text, out chipregistationnr))
                 {
                     DateTime Birthdate = dtpBirthdate.Value;
@@ -81,7 +81,7 @@ namespace AnimalShelter
 
 
 
-            RedrawItemsInAnimalListBox();
+            RedrawItemsInAnimalListBoxes();
         }
 
         private void animalTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -115,32 +115,48 @@ namespace AnimalShelter
             {
                 foundAnimal = administration.FindAnimal(chipnummer);
             }
-
-            lbAnimals.Items.Clear();
+            lbFound.Items.Clear();
             if (foundAnimal != null)
             {
-                lbAnimals.Items.Add(foundAnimal);
-            }
-            else if (String.IsNullOrWhiteSpace(chipNumberText))
-            {
-                RedrawItemsInAnimalListBox();
+                lbFound.Items.Add(foundAnimal);
             }
         }
 
-        private void btnChangeReservedStatus_Click(object sender, EventArgs e)
+        private void ChangeReservationFromListbox(ListBox listbox)
         {
-            if (lbAnimals.SelectedItem != null)
+            if (listbox.SelectedItem != null)
             {
-                Animal selectedAnimal = (Animal)lbAnimals.SelectedItem;
+                Animal selectedAnimal = (Animal)listbox.SelectedItem;
                 selectedAnimal.IsReserved = !selectedAnimal.IsReserved;
             }
-            RedrawItemsInAnimalListBox();
+            RedrawItemsInAnimalListBoxes();
+        }
+        private void btnChangeToReserved_Click(object sender, EventArgs e)
+        {
+            ChangeReservationFromListbox(lbNotReserved);
         }
 
-        private void RedrawItemsInAnimalListBox()
+        private void btnChangeToNotReserved_Click(object sender, EventArgs e)
         {
-            lbAnimals.Items.Clear();
-            lbAnimals.Items.AddRange(administration.animals.ToArray());
+            ChangeReservationFromListbox(lbReserved);
+        }
+
+        private void RedrawItemsInAnimalListBoxes()
+        {
+            //new
+            lbReserved.Items.Clear();
+            lbNotReserved.Items.Clear();
+            foreach (Animal animal in administration.animals)
+            {
+                if (animal.IsReserved)
+                {
+                    lbReserved.Items.Add(animal);
+                }
+                else
+                {
+                    lbNotReserved.Items.Add(animal);
+                }
+            }
         }
 
         private void btnRemovefromList_Click(object sender, EventArgs e)
@@ -160,12 +176,17 @@ namespace AnimalShelter
 
                 if (administration.animals.Count > 0)
                 {
-                    Animal.chipNumbers.Remove(selectedAnimal.ChipRegistrationNumber);
+                    Animal.ChipNumbers.Remove(selectedAnimal.ChipRegistrationNumber);
                     administration.animals.RemoveAt(counter);
                 }
             }
             
-            RedrawItemsInAnimalListBox();
+            RedrawItemsInAnimalListBoxes();
+        }
+
+        private void lbReserved_SelectedIndexChanged(object sender, EventArgs e)
+        {
+                lbNotReserved.SelectedItem = null;
         }
     }
 }

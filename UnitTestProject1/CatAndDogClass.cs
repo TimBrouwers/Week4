@@ -30,7 +30,7 @@ namespace AnimalShelterTest
         [TestInitialize]
         public void InitializeTest()
         {
-            Animal.chipNumbers = new List<int>(); //delete the old list from the previous test
+            Animal.ChipNumbers = new List<int>(); //delete the old list from the previous test
         }
 
 
@@ -94,6 +94,14 @@ namespace AnimalShelterTest
             string invalidName = string.Empty;
 
             _cat = new Cat(_chipNumber, _dateOfBirth, invalidName, _badHabits);
+        }
+
+        [TestMethod]
+        public void ToStringTest()
+        {
+            Cat testCat = new Cat(3, new SimpleDate(1, 2, 2011), "name", "none" );
+            string expected = "Cat: 3, 01-02-2011, name, not reserved, none";
+            Assert.AreEqual(expected, testCat.ToString());
         }
     }
 }

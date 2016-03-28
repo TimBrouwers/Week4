@@ -13,6 +13,20 @@ namespace AnimalShelter
         /// </summary>
         public string BadHabits { get; set; }
 
+        public override decimal Price
+        {
+            get
+            {
+                int price = 60;
+                price = price - BadHabits.Length;
+                if (price < 20)
+                {
+                    price = 20;
+                }
+                return price;
+            }
+        }
+
         /// <summary>
         /// Creates a cat.
         /// </summary>
@@ -43,8 +57,7 @@ namespace AnimalShelter
         /// </returns>
         public override string ToString()
         {
-            // TODO: Put your own code here to make the method return the string specified in the
-            // method description.
+            string info;
             string BadHabitsString;
             if (BadHabits != null)
             {
@@ -54,7 +67,9 @@ namespace AnimalShelter
             {
                 BadHabitsString = "none";
             }
-            return "Cat: " + base.ToString() + BadHabitsString;
+
+            info = "Cat: " + base.ToString() + BadHabitsString;
+            return info;
         }
     }
 }

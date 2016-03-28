@@ -24,7 +24,23 @@ namespace AnimalShelter
                    string name, SimpleDate lastWalkDate) : base(chipRegistrationNumber, dateOfBirth, name)
         {
             LastWalkDate = lastWalkDate;
-            // TODO: Modify the constructor. Make sure it initializes all properties of the class.
+        }
+
+        public override decimal Price
+        {
+            get
+            {
+                int price = 0;
+                if (ChipRegistrationNumber < 50000)
+                {
+                    price = 200;
+                }
+                else
+                {
+                    price = 350;
+                }
+                return Price;
+            }
         }
 
         /// <summary>
@@ -41,8 +57,6 @@ namespace AnimalShelter
         /// </returns>
         public override string ToString()
         {
-            // TODO: Put your own code here to make the method return the string specified in the
-            // method description.
             string LastWalk;
             if(LastWalkDate == null)
             {
