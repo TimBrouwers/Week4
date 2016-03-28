@@ -64,7 +64,7 @@ namespace AnimalShelter
             string BadHabitsString;
             if (BadHabits != null)
             {
-                BadHabitsString = BadHabits.ToString();
+                BadHabitsString = BadHabits;
             }
             else
             {
