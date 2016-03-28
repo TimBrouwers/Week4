@@ -100,7 +100,7 @@ namespace AnimalShelterTest
         public void ToStringTestCat()
         {
             Cat testCat = new Cat(3, new SimpleDate(1, 2, 2011), "name", "none");
-            string expected = "Cat: 3, 01-02-2011, name, not reserved, none";
+            string expected = "Cat: 3, 01-02-2011, name, not reserved, €56, none"; //56 euros because none is 4 chars long
             Assert.AreEqual(expected, testCat.ToString());
         }
 
@@ -108,7 +108,7 @@ namespace AnimalShelterTest
         public void ToStringTestDog()
         {
             Dog testDog = new Dog(4, new SimpleDate(1, 2, 2011), "name", new SimpleDate(29, 1, 2011));
-            string expected = "Cat: 3, 01-02-2011, name, not reserved, 29-01-2011";
+            string expected = "Dog: 4, 01-02-2011, name, not reserved, €200, 29-01-2011"; 
             Assert.AreEqual(expected, testDog.ToString());
         }
 
