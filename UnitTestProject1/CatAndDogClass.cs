@@ -122,16 +122,27 @@ namespace AnimalShelterTest
         }
 
         [TestMethod]
-        public void PriceTestDag()
+        public void PriceTestDog()
         {
             Dog testDogPrice = new Dog(4, new SimpleDate(1, 2, 2011), "name", new SimpleDate(29, 1, 2011));
-            if (testDogPrice.ChipRegistrationNumber >= 50000)
+            PriceDogTest(testDogPrice);
+        }
+
+        public void PriceTestDogOver50000()
+        {
+            Dog testDogPrice = new Dog(50000, new SimpleDate(1, 2, 2011), "name", new SimpleDate(29, 1, 2011));
+            PriceDogTest(testDogPrice);
+        }
+
+        public void PriceDogTest(Dog dog)
+        {
+            if (dog.ChipRegistrationNumber >= 50000)
             {
-                Assert.IsTrue(testDogPrice.Price == 350);
+                Assert.IsTrue(dog.Price == 350);
             }
             else
             {
-                Assert.IsTrue(testDogPrice.Price == 200);
+                Assert.IsTrue(dog.Price == 200);
             }
         }
     }

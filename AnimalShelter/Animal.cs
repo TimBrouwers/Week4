@@ -8,7 +8,7 @@ namespace AnimalShelter
     /// <summary>
     /// Class representing an animal in the shelter.
     /// </summary>
-    public abstract class Animal : ISellable
+    public abstract class Animal : ISellable, IComparable<Animal>
     {
         public static List<int> ChipNumbers { get; set; }
 
@@ -115,6 +115,11 @@ namespace AnimalShelter
                           + ", " + "€" + Price
                           + ", ";
             return info;
+        }
+
+        public int CompareTo(Animal other)
+        {
+            return this.ChipRegistrationNumber.CompareTo(other.ChipRegistrationNumber);
         }
     }
 }

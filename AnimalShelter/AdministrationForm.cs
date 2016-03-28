@@ -145,7 +145,7 @@ namespace AnimalShelter
 
         private void RedrawItemsInAnimalListBoxes()
         {
-            //new
+            administration.animals.Sort();
             lbReserved.Items.Clear();
             lbNotReserved.Items.Clear();
             foreach (Animal animal in administration.animals)
