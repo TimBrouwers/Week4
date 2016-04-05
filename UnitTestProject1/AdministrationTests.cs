@@ -2,6 +2,7 @@
 using AnimalShelter;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 //using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace AnimalShelter.Tests
         {
             administration = new Administration();
             testAnimal = new Cat(1, new SimpleDate(1, 2, 2011), "name", "none");
-            testAnimal2 = new Dog(2, new SimpleDate(12,12, 2014), "doggy",new SimpleDate(13, 12, 2015));
+            testAnimal2 = new Dog(2, new SimpleDate(12, 12, 2014), "doggy", new SimpleDate(13, 12, 2015));
         }
 
         [TestInitialize]
@@ -40,10 +41,10 @@ namespace AnimalShelter.Tests
         }
 
         [TestMethod()]
+        [ExpectedException(typeof(ArgumentException))]
         public void AddTestFail()
         {
             administration.Add(null);
-            Assert.IsFalse(administration.animals.Contains(testAnimal));
         }
 
         [TestMethod()]
@@ -59,7 +60,16 @@ namespace AnimalShelter.Tests
         [TestMethod]
         public void RemoveAnimalTestFail()
         {
-            administration.Add(null);
+            try
+            {
+                administration.Add(null);
+            }
+
+            catch (ArgumentException ae)
+            {
+
+            }
+
             Assert.IsFalse(administration.RemoveAnimal(testAnimal.ChipRegistrationNumber));
         }
 
