@@ -14,18 +14,18 @@ namespace AnimalShelter
             animals = new List<Animal>();
         }
 
-        public bool Add(Animal animal)
+        //does not return a bool anymore, because exceptions are thrown when the input is wrong
+        public void Add(Animal animal)
         {
-            if (FindAnimal(animal.ChipRegistrationNumber) != null)
-            {
-                throw new ArgumentException("Chipregistrationnumber already exists");
-            }
             if (animal == null)
             {
                 throw new ArgumentException("Animal does not exist.");
             }
+            if (FindAnimal(animal.ChipRegistrationNumber) != null)
+            {
+                throw new ArgumentException("Chipregistrationnumber already exists");
+            }
             animals.Add(animal);
-            return true;
         }
 
         public bool RemoveAnimal(int chipRegistrationNumber)
@@ -45,7 +45,6 @@ namespace AnimalShelter
                     foundAnimal = animal;
                 }
             }
-
             return foundAnimal;
         }
     }

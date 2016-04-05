@@ -111,7 +111,6 @@ namespace AnimalShelter
                     break;
                 default:
                     throw new NotImplementedException();
-                    break;
             }
         }
 
