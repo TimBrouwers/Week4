@@ -111,10 +111,9 @@ namespace AnimalShelterTest
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void NoNameGiven()
+        public void InValidCatName()
         {
             string invalidName = string.Empty;
-
             cat = new Cat(chipNumber, dateOfBirth, invalidName, badHabits);
         }
 
@@ -122,16 +121,14 @@ namespace AnimalShelterTest
         public void ToStringTestCat()
         {
             Cat testCat = new Cat(3, new SimpleDate(1, 2, 2011), "name", "hello");
-            string expected = "Cat: 3, 01-02-2011, name, not reserved, €55, hello"; //55 euros because hello is 5 chars long
-            Assert.AreEqual(expected, testCat.ToString());
+            Assert.AreEqual("Cat: 3, 01-02-2011, name, not reserved, €55, hello", testCat.ToString()); //55 euros because hello is 5 chars long
         }
 
         [TestMethod]
         public void ToStringTestDog()
         {
             Dog testDog = new Dog(4, new SimpleDate(1, 2, 2011), "name", new SimpleDate(26, 2, 2011));
-            string expected = "Dog: 4, 01-02-2011, name, not reserved, €200, 26-02-2011"; 
-            Assert.AreEqual(expected, testDog.ToString());
+            Assert.AreEqual("Dog: 4, 01-02-2011, name, not reserved, €200, 26-02-2011", testDog.ToString());
         }
 
         [TestMethod]
