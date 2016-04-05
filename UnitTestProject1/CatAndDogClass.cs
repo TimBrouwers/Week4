@@ -122,7 +122,7 @@ namespace AnimalShelterTest
         public void ToStringTestCat()
         {
             Cat testCat = new Cat(3, new SimpleDate(1, 2, 2011), "name", "hello");
-            string expected = "Cat: 3, 01-02-2011, name, not reserved, €55, hello"; //56 euros because none is 4 chars long
+            string expected = "Cat: 3, 01-02-2011, name, not reserved, €55, hello"; //55 euros because hello is 5 chars long
             Assert.AreEqual(expected, testCat.ToString());
         }
 
