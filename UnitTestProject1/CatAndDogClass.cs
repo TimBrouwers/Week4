@@ -30,25 +30,24 @@ namespace AnimalShelterTest
         [TestInitialize]
         public void InitializeTest()
         {
-            Animal.ChipNumbers = new List<int>(); //delete the old list from the previous test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(WrongInputException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void NoNameCat()
         {
             _cat = new Cat(_chipNumber, _dateOfBirth, null, _badHabits);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(WrongInputException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void NoNameDog()
         {
             _dog = new Dog(_chipNumber, _dateOfBirth, null, null);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(WrongInputException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void NoChipNumber()
         {
             _cat = new Cat(0, _dateOfBirth, _name, _badHabits);
@@ -77,7 +76,7 @@ namespace AnimalShelterTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(WrongInputException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void CatObjectCreationWithInvalidBirthDate()
         {
             DateTime now = DateTime.Now;
@@ -92,7 +91,7 @@ namespace AnimalShelterTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(WrongInputException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void InvalidchipNumberCat()
         {
             int invalidChipNumber = -1;
@@ -101,7 +100,7 @@ namespace AnimalShelterTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(WrongInputException))]
+        [ExpectedException(typeof(ArgumentException))]
 
         public void InvalidchipNumberDog()
         {
@@ -111,7 +110,7 @@ namespace AnimalShelterTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(WrongInputException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void NoNameGiven()
         {
             string invalidName = string.Empty;
@@ -130,8 +129,8 @@ namespace AnimalShelterTest
         [TestMethod]
         public void ToStringTestDog()
         {
-            Dog testDog = new Dog(4, new SimpleDate(1, 2, 2011), "name", new SimpleDate(29, 1, 2011));
-            string expected = "Dog: 4, 01-02-2011, name, not reserved, €200, 29-01-2011"; 
+            Dog testDog = new Dog(4, new SimpleDate(1, 2, 2011), "name", new SimpleDate(26, 2, 2011));
+            string expected = "Dog: 4, 01-02-2011, name, not reserved, €200, 26-02-2011"; 
             Assert.AreEqual(expected, testDog.ToString());
         }
 
@@ -155,8 +154,17 @@ namespace AnimalShelterTest
         [TestMethod]
         public void PriceTestDog()
         {
-            Dog testDogPrice = new Dog(4, new SimpleDate(1, 2, 2011), "name", new SimpleDate(29, 1, 2011));
+            Dog testDogPrice = new Dog(4, new SimpleDate(1, 2, 2011), "name", new SimpleDate(26, 2, 2011));
             PriceDogTest(testDogPrice);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void LastwalkDateErrorTest()
+        {
+            Dog testDogLastwalkDate1 = new Dog(5, new SimpleDate(1, 2, 2011), "name", new SimpleDate(29, 3, DateTime.Now.Year + 1));
+            Dog testDogLastwalkDate2 = new Dog(6, new SimpleDate(1, 2, 2011), "name", new SimpleDate(29, 1, 2011));
+            
         }
 
         public void PriceTestDogOver50000()
@@ -176,5 +184,7 @@ namespace AnimalShelterTest
                 Assert.IsTrue(dog.Price == 200);
             }
         }
+
+
     }
 }

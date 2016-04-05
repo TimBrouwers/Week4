@@ -10,7 +10,7 @@ namespace AnimalShelter
     /// </summary>
     public abstract class Animal : ISellable, IComparable<Animal>
     {
-        public static List<int> ChipNumbers { get; set; }
+        //public static List<int> ChipNumbers { get; set; }
 
         public abstract decimal Price { get; }
         /// <summary>
@@ -40,49 +40,29 @@ namespace AnimalShelter
         ///                                      Must be unique. Must be zero or greater than zero.</param>
         /// <param name="dateOfBirth">The date of birth of the animal.</param>
         /// <param name="name">The name of the animal.</param>
-        static Animal()
-        {
-            ChipNumbers = new List<int>();
-        }
-
         public Animal(int chipRegistrationNumber, SimpleDate dateOfBirth, string name)
         {
-            if (!string.IsNullOrWhiteSpace(name))
+            if (string.IsNullOrEmpty(name))
             {
-                Name = name;
-            }
-            else
-            {
-                throw new WrongInputException("Invalid name");
-            }
-            if (chipRegistrationNumber > 0)
-            {
-                ChipRegistrationNumber = chipRegistrationNumber;
-            }
-            else
-            {
-                throw new WrongInputException("Chipnumber wrong");
+                throw new ArgumentException("Invalid name");
             }
 
-            if (dateOfBirth != null && SimpleDate.Compare(dateOfBirth, new SimpleDate(DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year)) > 0)
+                
+            if (chipRegistrationNumber <= 0)
             {
-                DateOfBirth = dateOfBirth;
+                throw new ArgumentException("Chipnumber wrong");
+                
             }
-            else
+
+            if (dateOfBirth == null || SimpleDate.Compare(dateOfBirth, new SimpleDate(DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year)) <= 0)
             {
-                throw new WrongInputException("Date of birth is of the wrong type or later than today");
+                throw new ArgumentException("Date of birth is of the wrong type or later than today");
             }
+            DateOfBirth = dateOfBirth;
+            
+            Name = name;
+            ChipRegistrationNumber = chipRegistrationNumber;
             IsReserved = false;
-
-            //all steps were succesful, so we can add the chipnumber to the list
-            foreach (int chipNumber in ChipNumbers)
-            {
-                if (chipNumber == chipRegistrationNumber)
-                {
-                    throw new ExistingChipNumberException("This chipnumber already exists");
-                }
-            }
-            ChipNumbers.Add(chipRegistrationNumber);
         }
 
         /// <summary>

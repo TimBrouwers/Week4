@@ -261,7 +261,7 @@
             this.lbNotReserved.FormattingEnabled = true;
             this.lbNotReserved.Location = new System.Drawing.Point(693, 39);
             this.lbNotReserved.Name = "lbNotReserved";
-            this.lbNotReserved.Size = new System.Drawing.Size(264, 251);
+            this.lbNotReserved.Size = new System.Drawing.Size(338, 251);
             this.lbNotReserved.TabIndex = 26;
             this.lbNotReserved.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lbNotReserved_MouseClick);
             // 
@@ -296,7 +296,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(969, 516);
+            this.ClientSize = new System.Drawing.Size(1117, 516);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbFound);
             this.Controls.Add(this.btnChangeToNotReserved);

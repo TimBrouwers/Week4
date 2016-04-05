@@ -65,14 +65,21 @@ namespace AnimalShelter
                             throw new NotImplementedException("animal is not known");
                     }
                     animal.IsReserved = rbIsReservedYes.Checked;
-                    administration.Add(animal);
+                    try
+                    {
+                        administration.Add(animal);
+                    }
+                    catch (ArgumentException ae)
+                    {
+                        MessageBox.Show(ae.Message, "Exception");
+                    }
                 }
                 else
                 {
-                    throw new WrongInputException("chipnumber not right");
+                    throw new ArgumentException("chipnumber not right or too big");
                 }
             }
-            catch (WrongInputException wie)
+            catch (ArgumentException wie)
             {
                 MessageBox.Show(wie.Message, "Error");
             }
@@ -163,7 +170,6 @@ namespace AnimalShelter
 
         private void btnRemovefromList_Click(object sender, EventArgs e)
         {
-            int counter = 0;
             Animal selectedAnimal = null;
             if (lbNotReserved.SelectedItem != null)
             {
@@ -174,25 +180,10 @@ namespace AnimalShelter
                 selectedAnimal = (Animal)lbReserved.SelectedItem;
             }
 
-
-            if (selectedAnimal != null)
+            if (!administration.animals.Remove(selectedAnimal))
             {
-                foreach (var an in administration.animals)
-                {
-                    if (an == selectedAnimal)
-                    {
-                        break;
-                    }
-                    counter++;
-                }
-
-                if (administration.animals.Count > 0)
-                {
-                    Animal.ChipNumbers.Remove(selectedAnimal.ChipRegistrationNumber);
-                    administration.animals.RemoveAt(counter);
-                }
+                MessageBox.Show("No animal was selected.");
             }
-
             RedrawItemsInAnimalListBoxes();
         }
 

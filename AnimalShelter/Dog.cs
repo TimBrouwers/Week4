@@ -23,7 +23,20 @@ namespace AnimalShelter
         public Dog(int chipRegistrationNumber, SimpleDate dateOfBirth,
                    string name, SimpleDate lastWalkDate) : base(chipRegistrationNumber, dateOfBirth, name)
         {
-            LastWalkDate = lastWalkDate;
+            if (lastWalkDate != null)
+            {
+                if (SimpleDate.Compare(lastWalkDate, dateOfBirth) < 0 &&
+                    SimpleDate.Compare(lastWalkDate,
+                        new SimpleDate(DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year)) >=
+                    0)
+                {
+                    LastWalkDate = lastWalkDate;
+                }
+                else
+                {
+                    throw new ArgumentException("The dog's lastwalkdate is before birthday or after today.");
+                }
+            }
         }
 
         public override decimal Price
@@ -59,7 +72,7 @@ namespace AnimalShelter
         {
             string info;
             string LastWalk;
-            if(LastWalkDate == null)
+            if (LastWalkDate == null)
             {
                 LastWalk = "unknown";
             }

@@ -24,9 +24,7 @@ namespace AnimalShelter.Tests
 
         [TestInitialize]
         public void InitializeTest()
-        {
-            Animal.ChipNumbers = new List<int>(); //delete the old list from the previous test
-        }
+        { }
 
         [TestMethod()]
         public void AdministrationTest()

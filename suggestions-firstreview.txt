@@ -1,0 +1,11 @@
+Toets animalshelter
+
+--public static list chipnumber implementation
+--wronginputexception should be argumentexception
+
+--chipnumber duplication should be checked in administration, instead of having a chipnumber list
+
+--making double animals, should be allowed. administration should check if double animals are to be added
+
+--double code in findanimal and removeanimal
+

@@ -16,9 +16,13 @@ namespace AnimalShelter
 
         public bool Add(Animal animal)
         {
+            if (FindAnimal(animal.ChipRegistrationNumber) != null)
+            {
+                throw new ArgumentException("Chipregistrationnumber already exists");
+            }
             if (animal == null)
             {
-                return false;
+                throw new ArgumentException("Animal does not exist.");
             }
             animals.Add(animal);
             return true;
@@ -26,15 +30,7 @@ namespace AnimalShelter
 
         public bool RemoveAnimal(int chipRegistrationNumber)
         {
-            Animal animalToRemove = null;
-            foreach (Animal animal in animals)
-            {
-                if (animal.ChipRegistrationNumber == chipRegistrationNumber)
-                {
-                    animalToRemove = animal;
-                    break;
-                }
-            }
+            Animal animalToRemove = FindAnimal(chipRegistrationNumber);
             return animals.Remove(animalToRemove);
         }
 

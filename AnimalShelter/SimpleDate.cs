@@ -75,7 +75,8 @@ namespace AnimalShelter
                 {
                     result = -1;
                 }
-            } else
+            }
+            else
             {
                 throw new NullReferenceException("simpledate was null");
             }
