@@ -8,23 +8,23 @@ namespace AnimalShelterTest
     [TestClass]
     public class CatAndDogClass
     {
-        private readonly SimpleDate _lastWalkDate;
-        private readonly SimpleDate _dateOfBirth;
-        private int _chipNumber;
-        private readonly string _name;
-        private readonly string _badHabits;
-        private Dog _dog;
-        private Cat _cat;
+        private readonly SimpleDate lastWalkDate;
+        private readonly SimpleDate dateOfBirth;
+        private int chipNumber;
+        private readonly string name;
+        private readonly string badHabits;
+        private Dog dog;
+        private Cat cat;
 
         public CatAndDogClass()
         {
-            _lastWalkDate = new SimpleDate(22, 3, 2016);
-            _dateOfBirth = new SimpleDate(11, 12, 2015);
-            _chipNumber = 1;
-            _name = "test";
-            _badHabits = "does not do anything, walks away from humans";
-            _dog = null;
-            _cat = null;
+            lastWalkDate = new SimpleDate(22, 3, 2016);
+            dateOfBirth = new SimpleDate(11, 12, 2015);
+            chipNumber = 1;
+            name = "test";
+            badHabits = "does not do anything, walks away from humans";
+            dog = null;
+            cat = null;
         }
 
         [TestInitialize]
@@ -36,43 +36,43 @@ namespace AnimalShelterTest
         [ExpectedException(typeof(ArgumentException))]
         public void NoNameCat()
         {
-            _cat = new Cat(_chipNumber, _dateOfBirth, null, _badHabits);
+            cat = new Cat(chipNumber, dateOfBirth, null, badHabits);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void NoNameDog()
         {
-            _dog = new Dog(_chipNumber, _dateOfBirth, null, null);
+            dog = new Dog(chipNumber, dateOfBirth, null, null);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void NoChipNumber()
         {
-            _cat = new Cat(0, _dateOfBirth, _name, _badHabits);
+            cat = new Cat(0, dateOfBirth, name, badHabits);
         }
 
         [TestMethod]
         public void CatObjectCreation()
         {
-            _cat = new Cat(_chipNumber, _dateOfBirth, _name, _badHabits);
+            cat = new Cat(chipNumber, dateOfBirth, name, badHabits);
 
-            Assert.AreEqual(_chipNumber, _cat.ChipRegistrationNumber);
-            Assert.AreEqual(_badHabits, _cat.BadHabits);
-            Assert.AreEqual(_dateOfBirth, _cat.DateOfBirth);
-            Assert.AreEqual(_name, _cat.Name);
+            Assert.AreEqual(chipNumber, cat.ChipRegistrationNumber);
+            Assert.AreEqual(badHabits, cat.BadHabits);
+            Assert.AreEqual(dateOfBirth, cat.DateOfBirth);
+            Assert.AreEqual(name, cat.Name);
         }
 
         [TestMethod]
         public void DogObjectCreation()
         {
-            _dog = new Dog(_chipNumber, _dateOfBirth, _name, _lastWalkDate);
+            dog = new Dog(chipNumber, dateOfBirth, name, lastWalkDate);
 
-            Assert.AreEqual(_chipNumber, _dog.ChipRegistrationNumber);
-            Assert.AreEqual(_lastWalkDate, _dog.LastWalkDate);
-            Assert.AreEqual(_dateOfBirth, _dog.DateOfBirth);
-            Assert.AreEqual(_name, _dog.Name);
+            Assert.AreEqual(chipNumber, dog.ChipRegistrationNumber);
+            Assert.AreEqual(lastWalkDate, dog.LastWalkDate);
+            Assert.AreEqual(dateOfBirth, dog.DateOfBirth);
+            Assert.AreEqual(name, dog.Name);
         }
 
         [TestMethod]
@@ -82,12 +82,12 @@ namespace AnimalShelterTest
             DateTime now = DateTime.Now;
             DateTime oneDayAfterNow = now.AddDays(1);
             SimpleDate invalidDateOfBirth = new SimpleDate(oneDayAfterNow.Day, oneDayAfterNow.Month, oneDayAfterNow.Year);
-            _cat = new Cat(_chipNumber, invalidDateOfBirth, _name, _badHabits);
+            cat = new Cat(chipNumber, invalidDateOfBirth, name, badHabits);
 
-            Assert.AreEqual(_chipNumber, _cat.ChipRegistrationNumber);
-            Assert.AreEqual(_badHabits, _cat.BadHabits);
-            Assert.AreEqual(_dateOfBirth, _cat.DateOfBirth);
-            Assert.AreEqual(_name, _cat.Name);
+            Assert.AreEqual(chipNumber, cat.ChipRegistrationNumber);
+            Assert.AreEqual(badHabits, cat.BadHabits);
+            Assert.AreEqual(dateOfBirth, cat.DateOfBirth);
+            Assert.AreEqual(name, cat.Name);
         }
 
         [TestMethod]
@@ -96,7 +96,7 @@ namespace AnimalShelterTest
         {
             int invalidChipNumber = -1;
 
-            _cat = new Cat(invalidChipNumber, _dateOfBirth, _name, _badHabits);
+            cat = new Cat(invalidChipNumber, dateOfBirth, name, badHabits);
         }
 
         [TestMethod]
@@ -106,7 +106,7 @@ namespace AnimalShelterTest
         {
             int invalidChipNumber = -1;
 
-            _dog = new Dog(invalidChipNumber, _dateOfBirth, _name, _lastWalkDate);
+            dog = new Dog(invalidChipNumber, dateOfBirth, name, lastWalkDate);
         }
 
         [TestMethod]
@@ -115,7 +115,7 @@ namespace AnimalShelterTest
         {
             string invalidName = string.Empty;
 
-            _cat = new Cat(_chipNumber, _dateOfBirth, invalidName, _badHabits);
+            cat = new Cat(chipNumber, dateOfBirth, invalidName, badHabits);
         }
 
         [TestMethod]
@@ -160,11 +160,16 @@ namespace AnimalShelterTest
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void LastwalkDateErrorTest()
+        public void LastwalkDateLaterThanToday()
         {
-            Dog testDogLastwalkDate1 = new Dog(5, new SimpleDate(1, 2, 2011), "name", new SimpleDate(29, 3, DateTime.Now.Year + 1));
-            Dog testDogLastwalkDate2 = new Dog(6, new SimpleDate(1, 2, 2011), "name", new SimpleDate(29, 1, 2011));
-            
+            Dog dogLastwalkDateAfterToday = new Dog(5, new SimpleDate(1, 2, 2011), "name", new SimpleDate(29, 3, DateTime.Now.Year + 1));
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void LastWalkDateBeforeBorn()
+        {
+            Dog dogLastwalkDateBeforeBorn = new Dog(6, new SimpleDate(1, 2, 2011), "name", new SimpleDate(29, 1, 2011));
         }
 
         public void PriceTestDogOver50000()
