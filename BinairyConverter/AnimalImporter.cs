@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace BinairyConverter
+namespace AnimalShelterImporter
 {
     public partial class AnimalInfoReader : Form
     {

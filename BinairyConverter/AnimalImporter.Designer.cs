@@ -1,4 +1,4 @@
-﻿namespace BinairyConverter
+﻿namespace AnimalShelterImporter
 {
     partial class AnimalInfoReader
     {
