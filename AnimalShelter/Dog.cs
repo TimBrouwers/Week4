@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace AnimalShelter
 {
-    public class Dog : Animal
+    [Serializable]
+    public class Dog : Animal, ISerializable
     {
         /// <summary>
         /// The date of the last walk of the dog. Contains null if unknown.
@@ -37,6 +41,29 @@ namespace AnimalShelter
                     throw new ArgumentException("The dog's lastwalkdate is before birthday or after today.");
                 }
             }
+
+        }
+
+        public Dog(SerializationInfo info, StreamingContext ctxt) : base(info, ctxt)
+        {
+            SimpleDate lastWalkDate = (SimpleDate)info.GetValue("LastWalkDate", typeof(SimpleDate));
+            if (lastWalkDate != null)
+            {
+                if (SimpleDate.Compare(lastWalkDate, base.DateOfBirth) >= 0 &&
+                    SimpleDate.Compare(lastWalkDate,
+                        new SimpleDate(DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year)) <
+                    0)
+                {
+                    throw new ArgumentException("The dog's lastwalkdate is before birthday or after today.");
+                }
+                LastWalkDate = lastWalkDate;
+            }
+        }
+
+        public override void GetObjectData(SerializationInfo info, StreamingContext ctxt)
+        {
+            base.GetObjectData(info,ctxt);
+            info.AddValue("LastWalkDate", LastWalkDate);
         }
 
         public override decimal Price

@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace AnimalShelter
 {
-    public class Cat : Animal
+    [Serializable]
+    public class Cat : Animal, ISerializable
     {
         /// <summary>
         /// Description of the bad habits that the cat has (e.g. "Scratches the couch").
@@ -45,6 +49,17 @@ namespace AnimalShelter
                    string name, string badHabits) : base(chipRegistrationNumber, dateOfBirth, name)
         {
                 BadHabits = badHabits;
+        }
+
+        public Cat(SerializationInfo info, StreamingContext ctxt) : base(info, ctxt)
+        {
+            BadHabits = (string) info.GetValue("BadHabits", typeof (string));
+        }
+
+        public override void GetObjectData(SerializationInfo info, StreamingContext ctxt)
+        {
+            base.GetObjectData(info, ctxt);
+            info.AddValue("BadHabits", BadHabits);
         }
 
         /// <summary>

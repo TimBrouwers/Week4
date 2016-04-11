@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace AnimalShelter
@@ -12,7 +13,8 @@ namespace AnimalShelter
     /// the .Net DateTime object. SimpleDate hides the more complex interface of DateTime
     /// and makes it easy to  work with dates only.
     /// </summary>
-    public class SimpleDate
+    [Serializable]
+    public class SimpleDate : ISerializable
     {
         private DateTime date;
 
@@ -25,6 +27,22 @@ namespace AnimalShelter
         public SimpleDate(int day, int month, int year)
         {
             date = new DateTime(year, month, day);
+        }
+
+        public SimpleDate(SerializationInfo info, StreamingContext ctxt)
+        {
+            DateTime dateTest = (DateTime) info.GetValue("date", typeof (DateTime));
+            //made this check because we found datetime would get the minvalue if is was assigned a null value/invalid value
+            if (dateTest == DateTime.MinValue)
+            {
+                throw new ArgumentException("Simpledate was invalid, aborting serialization.");
+            }
+            date = dateTest;
+        }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext ctxt)
+        {
+            info.AddValue("date", date);
         }
 
         /// <summary>

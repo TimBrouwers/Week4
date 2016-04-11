@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+
 
 namespace AnimalShelter
 {
     /// <summary>
     /// Class representing an animal in the shelter.
     /// </summary>
-    public abstract class Animal : ISellable, IComparable<Animal>
+    [Serializable]
+    public abstract class Animal : ISellable, IComparable<Animal>, ISerializable
     {
         //public static List<int> ChipNumbers { get; set; }
 
@@ -51,7 +56,6 @@ namespace AnimalShelter
             if (chipRegistrationNumber <= 0)
             {
                 throw new ArgumentException("Chipnumber wrong");
-                
             }
 
             if (dateOfBirth == null || SimpleDate.Compare(dateOfBirth, new SimpleDate(DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year)) <= 0)
@@ -63,6 +67,31 @@ namespace AnimalShelter
             Name = name;
             ChipRegistrationNumber = chipRegistrationNumber;
             IsReserved = false;
+        }
+
+        public Animal(SerializationInfo info, StreamingContext ctxt)
+        {
+            int chipnumber = (int) info.GetValue("ChipRegistrationNumber", typeof (int));
+            string name = (string) info.GetValue("Name", typeof (string));
+            SimpleDate dateofbirth = (SimpleDate) info.GetValue("BirthDate", typeof (SimpleDate));
+            bool isreserved = (bool) info.GetValue("Reserved", typeof (bool));
+
+            if (chipnumber < 0 && string.IsNullOrWhiteSpace(name) && dateofbirth == null)
+            {
+                throw new ArgumentException("One or more parameters are incorrect, aborting import.");
+            }
+            ChipRegistrationNumber = chipnumber;
+            Name = name;
+            DateOfBirth = dateofbirth;
+            IsReserved = isreserved;
+        }
+
+        public virtual void GetObjectData(SerializationInfo info, StreamingContext stctxt)
+        {
+            info.AddValue("ChipRegistrationNumber", ChipRegistrationNumber);
+            info.AddValue("Name", Name);
+            info.AddValue("BirthDate", DateOfBirth);
+            info.AddValue("Reserved", IsReserved);
         }
 
         /// <summary>

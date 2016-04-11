@@ -30,14 +30,14 @@ namespace AnimalShelter.Tests
         [TestMethod()]
         public void AdministrationTest()
         {
-            Assert.IsInstanceOfType(administration.animals, typeof(List<Animal>));
+            Assert.IsInstanceOfType(administration.Animals, typeof(List<Animal>));
         }
 
         [TestMethod()]
         public void AddTest()
         {
             administration.Add(testAnimal);
-            Assert.IsTrue(administration.animals.Contains(testAnimal));
+            Assert.IsTrue(administration.Animals.Contains(testAnimal));
         }
 
         [TestMethod()]
@@ -48,13 +48,13 @@ namespace AnimalShelter.Tests
         }
 
         [TestMethod()]
-        public void RemoveAnimalTest() //add two animals to test if not the wrong animal was removed
+        public void RemoveAnimalTest() //add two Animals to test if not the wrong animal was removed
         {
             administration.Add(testAnimal);
             administration.Add(testAnimal2);
             Assert.IsTrue(administration.RemoveAnimal(testAnimal2.ChipRegistrationNumber));
-            Assert.IsFalse(administration.animals.Contains(testAnimal2));
-            Assert.IsTrue(administration.animals.Contains(testAnimal));
+            Assert.IsFalse(administration.Animals.Contains(testAnimal2));
+            Assert.IsTrue(administration.Animals.Contains(testAnimal));
         }
 
         [TestMethod]
@@ -65,7 +65,7 @@ namespace AnimalShelter.Tests
                 administration.Add(null);
             }
 
-            catch (ArgumentException ae)
+            catch (ArgumentException)
             {
 
             }
@@ -74,7 +74,7 @@ namespace AnimalShelter.Tests
         }
 
         [TestMethod()]
-        public void FindAnimalTest() //two animals so it will work when more than one animals are added
+        public void FindAnimalTest() //two Animals so it will work when more than one Animals are added
         {
             administration.Add(testAnimal);
             administration.Add(testAnimal2);

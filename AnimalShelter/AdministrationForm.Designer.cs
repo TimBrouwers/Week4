@@ -54,6 +54,8 @@
             this.btnChangeToNotReserved = new System.Windows.Forms.Button();
             this.lbFound = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnLoad = new System.Windows.Forms.Button();
             this.GBIsReserved.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -292,11 +294,33 @@
             this.label1.TabIndex = 29;
             this.label1.Text = "Not reserved:";
             // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(294, 350);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.TabIndex = 30;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnLoad
+            // 
+            this.btnLoad.Location = new System.Drawing.Point(376, 350);
+            this.btnLoad.Name = "btnLoad";
+            this.btnLoad.Size = new System.Drawing.Size(75, 23);
+            this.btnLoad.TabIndex = 31;
+            this.btnLoad.Text = "Load";
+            this.btnLoad.UseVisualStyleBackColor = true;
+            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
+            // 
             // AdministrationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1117, 516);
+            this.Controls.Add(this.btnLoad);
+            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbFound);
             this.Controls.Add(this.btnChangeToNotReserved);
@@ -358,6 +382,8 @@
         private System.Windows.Forms.Button btnChangeToNotReserved;
         private System.Windows.Forms.ListBox lbFound;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnLoad;
     }
 }
 

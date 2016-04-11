@@ -1,17 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Mail;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Security.Policy;
 using System.Text;
+using System.Windows.Forms;
 
 namespace AnimalShelter
 {
-    public class Administration
+    [Serializable]
+    public class Administration : ISerializable
     {
-        public List<Animal> animals { get; private set; }
+        public List<Animal> Animals { get; private set; }
+
+        private Stream file = null;
 
         public Administration()
         {
-            animals = new List<Animal>();
+            Animals = new List<Animal>();
+        }
+
+        public Administration(SerializationInfo info, StreamingContext ctxt)
+        {
+            Animals = (List<Animal>)info.GetValue("Animals", typeof(List<Animal>));
+        }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext ctxt)
+        {
+            info.AddValue("Animals", Animals);
         }
 
         //does not return a bool anymore, because exceptions are thrown when the input is wrong
@@ -25,20 +44,20 @@ namespace AnimalShelter
             {
                 throw new ArgumentException("Chipregistrationnumber already exists");
             }
-            animals.Add(animal);
+            Animals.Add(animal);
         }
 
         public bool RemoveAnimal(int chipRegistrationNumber)
         {
             Animal animalToRemove = FindAnimal(chipRegistrationNumber);
-            return animals.Remove(animalToRemove);
+            return Animals.Remove(animalToRemove);
         }
 
         public Animal FindAnimal(int chipRegistrationNumber)
         {
             Animal foundAnimal = null;
 
-            foreach (Animal animal in animals)
+            foreach (Animal animal in Animals)
             {
                 if (animal.ChipRegistrationNumber == chipRegistrationNumber)
                 {
@@ -47,5 +66,66 @@ namespace AnimalShelter
             }
             return foundAnimal;
         }
+
+        /// <summary>
+        /// Saves all animals to a file with the given file name using serialisation.
+        /// </summary>
+        /// <param name="fileName">The file to write to.</param>
+        public void Save(string fileName)
+        {
+            try
+            {
+                file = File.Open(fileName, FileMode.Create);
+                BinaryFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(file, Animals);
+                file.Close();
+            }
+            catch (IOException ioException)
+            {
+                MessageBox.Show(ioException.Message);
+            }
+            finally
+            {
+                file.Close();
+            }
+        }
+
+        /// <summary>
+        /// Loads all animals from a file with the given file name using deserialisation.
+        /// All animals currently in the administration are removed.
+        /// </summary>
+        /// <param name="fileName">The file to read from.</param>
+        public void Load(string fileName)
+        {
+            if (!File.Exists(fileName))
+            {
+                throw new FileNotFoundException("File not found.");
+            }
+            try
+            {
+                file = File.Open(fileName, FileMode.Open);
+                BinaryFormatter formatter = new BinaryFormatter();
+                Animals = (List<Animal>) formatter.Deserialize(file);
+                file.Close();
+            }
+            catch (SerializationException)
+            {
+                throw new FileLoadException("File invalid or corrupt.");
+            }
+            /*
+            //this is an exception that was thrown while testing with corrupt files.
+            After reading the internet, it was concluded that this exception should close the application,
+            because there is not much we can do when this happens.
+            It might sometimes happen when trying to read a corrupt file.
+            catch (OutOfMemoryException)
+            {
+                throw new FileLoadException("File invalid or corrupt.");
+            }*/
+            finally
+            {
+                file.Close();
+            }
+        }
+
     }
 }

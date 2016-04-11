@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 //using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -151,10 +152,10 @@ namespace AnimalShelter
 
         private void RedrawItemsInAnimalListBoxes()
         {
-            administration.animals.Sort();
+            administration.Animals.Sort();
             lbReserved.Items.Clear();
             lbNotReserved.Items.Clear();
-            foreach (Animal animal in administration.animals)
+            foreach (Animal animal in administration.Animals)
             {
                 if (animal.IsReserved)
                 {
@@ -179,7 +180,7 @@ namespace AnimalShelter
                 selectedAnimal = (Animal)lbReserved.SelectedItem;
             }
 
-            if (!administration.animals.Remove(selectedAnimal))
+            if (!administration.Animals.Remove(selectedAnimal))
             {
                 MessageBox.Show("No animal was selected.");
             }
@@ -190,7 +191,7 @@ namespace AnimalShelter
         {
             administration.Add(new Cat(1, new SimpleDate(11, 3, 2010), "yaro", "everything"));
             administration.Add(new Dog(2, new SimpleDate(1, 11, 2014), "doggy", null));
-            administration.animals[1].IsReserved = true;
+            administration.Animals[1].IsReserved = true;
             administration.Add(new Cat(15, new SimpleDate(15, 3, 2015), "visstick", null));
             administration.Add(new Dog(50001, new SimpleDate(19, 7, 2015), "bark", new SimpleDate(16, 9, 2015)));
         }
@@ -203,6 +204,42 @@ namespace AnimalShelter
         private void lbReserved_MouseClick(object sender, MouseEventArgs e)
         {
             lbNotReserved.SelectedItem = null;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Database for animal shelter |*.thisisadatabaseforanimalshelter";
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                administration.Save(sfd.FileName);
+            }
+        }
+
+        private void btnLoad_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Database for animal shelter |*.thisisadatabaseforanimalshelter";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    administration.Load(ofd.FileName);
+                }
+                catch (FileNotFoundException fileNotFoundException)
+                {
+                    MessageBox.Show(fileNotFoundException.Message);
+                }
+                catch (FileLoadException flException)
+                {
+                    MessageBox.Show(flException.Message);
+                }
+                catch (IOException ioException)
+                {
+                    MessageBox.Show(ioException.Message);
+                }
+                RedrawItemsInAnimalListBoxes();
+            }
         }
     }
 }
