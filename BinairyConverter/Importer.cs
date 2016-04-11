@@ -9,8 +9,8 @@ namespace BinairyConverter
 {
     public class Importer
     {
-        public List<string> DogList { get; private set; }
-        public List<string> CatList { get; private set; }
+        public List<string> DogList { get; }
+        public List<string> CatList { get; }
 
         public Importer()
         {
