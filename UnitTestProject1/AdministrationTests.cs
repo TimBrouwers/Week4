@@ -114,5 +114,15 @@ namespace AnimalShelter.Tests
             administration.Load("notexistingfile");
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(FileLoadException))]
+        public void SerializedFileInvalid()
+        {
+            string testFilePath = "testfile.txt";
+            string randomGarbage = "abcdefghijklmnop";
+            File.WriteAllText(testFilePath, randomGarbage);
+            administration.Load(testFilePath);
+            File.Delete(testFilePath);
+        }
     }
 }
