@@ -41,14 +41,14 @@
             this.btnOpenFile.Name = "btnOpenFile";
             this.btnOpenFile.Size = new System.Drawing.Size(75, 23);
             this.btnOpenFile.TabIndex = 0;
-            this.btnOpenFile.Text = "Open File";
+            this.btnOpenFile.Text = "Import File";
             this.btnOpenFile.UseVisualStyleBackColor = true;
             this.btnOpenFile.Click += new System.EventHandler(this.btnOpenFile_Click);
             // 
             // lbCats
             // 
             this.lbCats.FormattingEnabled = true;
-            this.lbCats.Location = new System.Drawing.Point(12, 127);
+            this.lbCats.Location = new System.Drawing.Point(12, 57);
             this.lbCats.Name = "lbCats";
             this.lbCats.Size = new System.Drawing.Size(289, 199);
             this.lbCats.TabIndex = 1;
@@ -56,7 +56,7 @@
             // lbDogs
             // 
             this.lbDogs.FormattingEnabled = true;
-            this.lbDogs.Location = new System.Drawing.Point(307, 127);
+            this.lbDogs.Location = new System.Drawing.Point(307, 57);
             this.lbDogs.Name = "lbDogs";
             this.lbDogs.Size = new System.Drawing.Size(268, 199);
             this.lbDogs.TabIndex = 2;
@@ -64,7 +64,7 @@
             // TXTDogs
             // 
             this.TXTDogs.AutoSize = true;
-            this.TXTDogs.Location = new System.Drawing.Point(304, 111);
+            this.TXTDogs.Location = new System.Drawing.Point(304, 41);
             this.TXTDogs.Name = "TXTDogs";
             this.TXTDogs.Size = new System.Drawing.Size(35, 13);
             this.TXTDogs.TabIndex = 3;
@@ -73,7 +73,7 @@
             // TXTCats
             // 
             this.TXTCats.AutoSize = true;
-            this.TXTCats.Location = new System.Drawing.Point(12, 111);
+            this.TXTCats.Location = new System.Drawing.Point(12, 41);
             this.TXTCats.Name = "TXTCats";
             this.TXTCats.Size = new System.Drawing.Size(31, 13);
             this.TXTCats.TabIndex = 4;
@@ -83,7 +83,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(587, 338);
+            this.ClientSize = new System.Drawing.Size(587, 268);
             this.Controls.Add(this.TXTCats);
             this.Controls.Add(this.TXTDogs);
             this.Controls.Add(this.lbDogs);
