@@ -91,7 +91,6 @@ namespace AnimalShelter.Tests
             string newline = "\r\n";
             //areequal tests for testanimal with \r\n added, because export writes with a newline on the end
             Assert.AreEqual(testAnimal.ToString() + newline , File.ReadAllText("TestFile.txt"));
-            File.Delete("TestFile.txt");
         }
 
         [TestMethod]
@@ -104,7 +103,6 @@ namespace AnimalShelter.Tests
             //areequal tests for testanimal with \r\n added, because export writes with a newline on the end
             Assert.AreEqual(testAnimal.ToString() + newline + testAnimal2.ToString() + newline, 
                 File.ReadAllText("TestFile.txt"));
-            File.Delete("TestFile.txt");
         }
 
         [TestMethod]
@@ -122,7 +120,6 @@ namespace AnimalShelter.Tests
             string randomGarbage = "abcdefghijklmnop";
             File.WriteAllText(testFilePath, randomGarbage);
             administration.Load(testFilePath);
-            File.Delete(testFilePath);
         }
 
         [TestMethod]
