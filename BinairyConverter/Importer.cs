@@ -27,23 +27,31 @@ namespace BinairyConverter
                 string chipNumber, birthDate, name, badHabits;
                 if (infoAnimal.Length > 3)
                 {
-                    chipNumber = infoAnimal[1];
-                    birthDate = infoAnimal[2];
-                    name = infoAnimal[3];
+                    chipNumber = infoAnimal[1].Trim();
+                    birthDate = infoAnimal[2].Trim();
+                    name = infoAnimal[3].Trim();
                 }
                 else
                 {
                     throw new FileLoadException("File is corrupt or invalid.");
                 }
 
-                if (infoAnimal[0] == "Cat")
+                switch (infoAnimal[0])
                 {
-                    badHabits = infoAnimal.Length > 5 ? infoAnimal[6] : string.Empty;
-                    CatList.Add($"{chipNumber},{name},{birthDate},{badHabits}");
-                }
-                else if (infoAnimal[0] == "Dog")
-                {
-                    DogList.Add($"{chipNumber},{name},{birthDate}");
+                    case "Cat":
+                        if (infoAnimal.Length > 5)
+                        {
+                            badHabits = infoAnimal[6];
+                        }
+                        else
+                        {
+                            throw new FileLoadException("File is corrupt or invalid");
+                        }
+                        CatList.Add($"{chipNumber},{name},{birthDate},{badHabits}");
+                        break;
+                    case "Dog":
+                        DogList.Add($"{chipNumber},{name},{birthDate}");
+                        break;
                 }
             }
         }
