@@ -241,5 +241,15 @@ namespace AnimalShelter
                 RedrawItemsInAnimalListBoxes();
             }
         }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Text file|*.txt|All files|*.*";
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                administration.Export(sfd.FileName);
+            }
+        }
     }
 }

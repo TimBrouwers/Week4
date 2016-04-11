@@ -105,7 +105,7 @@ namespace AnimalShelter
             {
                 file = File.Open(fileName, FileMode.Open);
                 BinaryFormatter formatter = new BinaryFormatter();
-                Animals = (List<Animal>) formatter.Deserialize(file);
+                Animals = (List<Animal>)formatter.Deserialize(file);
                 file.Close();
             }
             catch (SerializationException)
@@ -125,6 +125,24 @@ namespace AnimalShelter
             {
                 file.Close();
             }
+        }
+
+        /// <summary>
+        /// Exports the info of all animals to a text file with the given file name.
+        /// 
+        /// Each line of the file contains the info about exactly one animal.
+        /// Each line starts with the type of animal and a colon (e.g. 'Cat:' or 'Dog:')
+        /// followed by the properties of the animal seperated by comma's.
+        /// </summary>
+        /// <param name="fileName">The text file to write to.</param>
+        public void Export(string fileName)
+        {
+            StreamWriter writer = new StreamWriter(fileName);
+            foreach (Animal a in Animals)
+            {
+                writer.WriteLine(a.ToString());
+            }
+            writer.Close();
         }
 
     }
