@@ -128,14 +128,18 @@ namespace AnimalShelter.Tests
             string pathToTestFile = "testfile.io";
             administration.Add(testAnimal);
             administration.Add(testAnimal2);
+            /* this does work 
+            Assert.IsTrue(administration.Animals.Contains(testAnimal));
+            */
             administration.Save(pathToTestFile);
             administration.Animals.Clear();
             Assert.IsFalse(administration.Animals.Contains(testAnimal));
             Assert.IsFalse(administration.Animals.Contains(testAnimal2));
+
             administration.Load(pathToTestFile);
             Assert.AreEqual(administration.FindAnimal(testAnimal.ChipRegistrationNumber).ToString(), testAnimal.ToString());
             Assert.AreEqual(administration.FindAnimal(testAnimal2.ChipRegistrationNumber).ToString(), testAnimal2.ToString());
-            /* does not work
+            /* but this does not work
             CollectionAssert.Contains(administration.Animals, testAnimal);
             Assert.IsTrue(administration.Animals.Contains(testAnimal2));
             */
