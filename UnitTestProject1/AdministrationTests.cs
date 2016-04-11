@@ -2,6 +2,7 @@
 using AnimalShelter;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq.Expressions;
 //using System.Linq;
 using System.Text;
@@ -81,5 +82,15 @@ namespace AnimalShelter.Tests
             Animal testAnimalFindAnimal = administration.FindAnimal(testAnimal2.ChipRegistrationNumber);
             Assert.AreEqual(testAnimal2, testAnimalFindAnimal);
         }
+
+        [TestMethod]
+        public void ExportTest()
+        {
+            administration.Add(testAnimal);
+            administration.Export("TestFile.txt");
+            //Assert.AreEqual(File.ReadAllText() == testAnimal.ToString());
+
+        }
+
     }
 }
