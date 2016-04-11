@@ -92,5 +92,12 @@ namespace AnimalShelter.Tests
 
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(FileNotFoundException))]
+        public void SerializedFileDoesNotExist()
+        {
+            administration.Load("notexistingfile");
+        }
+
     }
 }
