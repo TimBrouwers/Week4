@@ -15,7 +15,7 @@ namespace AnimalShelter
         /// Description of the bad habits that the cat has (e.g. "Scratches the couch").
         /// or null if the cat has no bad habits.
         /// </summary>
-        public string BadHabits { get; set; }
+        public string BadHabits { get; }
 
         public override decimal Price
         {

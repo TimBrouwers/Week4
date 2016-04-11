@@ -84,11 +84,6 @@ namespace AnimalShelter
             {
                 MessageBox.Show(wie.Message, "Error");
             }
-            catch (ExistingChipNumberException ecne)
-            {
-                MessageBox.Show(ecne.Message, "Error");
-            }
-
 
 
             RedrawItemsInAnimalListBoxes();
