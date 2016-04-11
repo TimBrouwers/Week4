@@ -84,10 +84,13 @@ namespace AnimalShelter.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof (FileNotFoundException))]
-        public void SerializedFileDoesNotExist()
+        public void ExportTest()
         {
-            administration.Load("notexistingfile");
+            administration.Add(testAnimal);
+            administration.Export("TestFile.txt");
+            //Assert.AreEqual(File.ReadAllText() == testAnimal.ToString());
+
         }
+
     }
 }
