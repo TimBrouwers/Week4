@@ -123,7 +123,7 @@ namespace AnimalShelter.Tests
         }
 
         [TestMethod]
-        public void SerializationTest()
+        public void SerializationTestLoadAndSave()
         {
             string pathToTestFile = "testfile.io";
             administration.Add(testAnimal);
