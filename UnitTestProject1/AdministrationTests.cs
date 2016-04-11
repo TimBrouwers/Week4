@@ -124,5 +124,22 @@ namespace AnimalShelter.Tests
             administration.Load(testFilePath);
             File.Delete(testFilePath);
         }
+
+        [TestMethod]
+        public void SerializationTest()
+        {
+            string pathToTestFile = "testfile.io";
+            administration.Add(testAnimal);
+            administration.Add(testAnimal2);
+            administration.Save(pathToTestFile);
+            administration.RemoveAnimal(testAnimal.ChipRegistrationNumber);
+            administration.RemoveAnimal(testAnimal2.ChipRegistrationNumber);
+            Assert.IsFalse(administration.Animals.Contains(testAnimal));
+            Assert.IsFalse(administration.Animals.Contains(testAnimal2));
+            administration.Load(pathToTestFile);
+            Assert.IsTrue(administration.Animals.Contains(testAnimal));
+            Assert.IsTrue(administration.Animals.Contains(testAnimal2));
+        }
+
     }
 }
