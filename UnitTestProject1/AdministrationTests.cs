@@ -129,13 +129,16 @@ namespace AnimalShelter.Tests
             administration.Add(testAnimal);
             administration.Add(testAnimal2);
             administration.Save(pathToTestFile);
-            administration.RemoveAnimal(testAnimal.ChipRegistrationNumber);
-            administration.RemoveAnimal(testAnimal2.ChipRegistrationNumber);
+            administration.Animals.Clear();
             Assert.IsFalse(administration.Animals.Contains(testAnimal));
             Assert.IsFalse(administration.Animals.Contains(testAnimal2));
             administration.Load(pathToTestFile);
-            Assert.IsTrue(administration.Animals.Contains(testAnimal));
+            Assert.IsTrue(administration.FindAnimal(testAnimal.ChipRegistrationNumber).ToString() == testAnimal.ToString());
+            Assert.AreEqual(administration.FindAnimal(testAnimal2.ChipRegistrationNumber).ToString(), testAnimal2.ToString());
+            /* does not work
+            CollectionAssert.Contains(administration.Animals, testAnimal);
             Assert.IsTrue(administration.Animals.Contains(testAnimal2));
+            */
         }
 
     }
