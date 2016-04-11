@@ -84,12 +84,27 @@ namespace AnimalShelter.Tests
         }
 
         [TestMethod]
-        public void ExportTest()
+        public void ExportTestOneAnimal()
         {
             administration.Add(testAnimal);
             administration.Export("TestFile.txt");
-            //Assert.AreEqual(File.ReadAllText() == testAnimal.ToString());
+            string newline = "\r\n";
+            //areequal tests for testanimal with \r\n added, because export writes with a newline on the end
+            Assert.AreEqual(testAnimal.ToString() + newline , File.ReadAllText("TestFile.txt"));
+            File.Delete("TestFile.txt");
+        }
 
+        [TestMethod]
+        public void ExportTestMoreAnimals()
+        {
+            administration.Add(testAnimal);
+            administration.Add(testAnimal2);
+            administration.Export("TestFile.txt");
+            string newline = "\r\n";
+            //areequal tests for testanimal with \r\n added, because export writes with a newline on the end
+            Assert.AreEqual(testAnimal.ToString() + newline + testAnimal2.ToString() + newline, 
+                File.ReadAllText("TestFile.txt"));
+            File.Delete("TestFile.txt");
         }
 
         [TestMethod]
