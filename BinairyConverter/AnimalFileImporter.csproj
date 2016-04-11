@@ -46,22 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\AnimalShelter\Animal.cs">
-      <Link>Animal.cs</Link>
-    </Compile>
-    <Compile Include="..\AnimalShelter\Cat.cs">
-      <Link>Cat.cs</Link>
-    </Compile>
-    <Compile Include="..\AnimalShelter\Dog.cs">
-      <Link>Dog.cs</Link>
-    </Compile>
-    <Compile Include="..\AnimalShelter\ISellable.cs">
-      <Link>ISellable.cs</Link>
-    </Compile>
-    <Compile Include="..\AnimalShelter\SimpleDate.cs">
-      <Link>SimpleDate.cs</Link>
-    </Compile>
-    <Compile Include="Administration.cs" />
+    <Compile Include="Importer.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

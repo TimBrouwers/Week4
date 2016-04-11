@@ -140,7 +140,30 @@ namespace AnimalShelter
             StreamWriter writer = new StreamWriter(fileName);
             foreach (Animal a in Animals)
             {
-                writer.WriteLine(a.ToString());
+                string exportInfo = null;
+                if (a is Cat)
+                {
+                    Cat cat = a as Cat;
+                    exportInfo = string.Format("Cat:{0},{1},{2},{3},{4},{5}",
+                        cat.ChipRegistrationNumber,
+                        cat.DateOfBirth,
+                        cat.Name,
+                        cat.IsReserved,
+                        cat.Price,
+                        cat.BadHabits);
+                }
+                else if (a is Dog)
+                {
+                    Dog dog = a as Dog;
+                    exportInfo = string.Format("Dog:{0},{1},{2},{3},{4},{5}",
+                        dog.ChipRegistrationNumber,
+                        dog.DateOfBirth,
+                        dog.Name,
+                        dog.IsReserved,
+                        dog.Price,
+                        dog.LastWalkDate);
+                }
+                writer.WriteLine(exportInfo);
             }
             writer.Close();
         }
