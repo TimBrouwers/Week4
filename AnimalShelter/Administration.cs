@@ -138,12 +138,11 @@ namespace AnimalShelter
         public void Export(string fileName)
         {
             StreamWriter writer = new StreamWriter(fileName);
-            foreach (Animal a in Animals)
+            foreach (Animal animal in Animals)
             {
-                writer.WriteLine(a.ToString());
+                writer.WriteLine(animal.ToString());
             }
             writer.Close();
         }
-
     }
 }

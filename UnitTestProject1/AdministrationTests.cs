@@ -2,6 +2,7 @@
 using AnimalShelter;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq.Expressions;
 //using System.Linq;
 using System.Text;
@@ -80,6 +81,13 @@ namespace AnimalShelter.Tests
             administration.Add(testAnimal2);
             Animal testAnimalFindAnimal = administration.FindAnimal(testAnimal2.ChipRegistrationNumber);
             Assert.AreEqual(testAnimal2, testAnimalFindAnimal);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof (FileNotFoundException))]
+        public void SerializedFileDoesNotExist()
+        {
+            administration.Load("notexistingfile");
         }
     }
 }
