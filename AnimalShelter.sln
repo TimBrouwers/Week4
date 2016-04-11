@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimalShelter", "AnimalShel
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimalShelterTest", "UnitTestProject1\AnimalShelterTest.csproj", "{207BADAE-EB5C-48BA-A9BE-3DF58E385570}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimalFileImporter", "BinairyConverter\AnimalFileImporter.csproj", "{BF1B7B71-4729-402F-9271-8DDF3D1A5FB0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,14 @@ Global
 		{207BADAE-EB5C-48BA-A9BE-3DF58E385570}.Release|Any CPU.Build.0 = Release|Any CPU
 		{207BADAE-EB5C-48BA-A9BE-3DF58E385570}.Release|x86.ActiveCfg = Release|Any CPU
 		{207BADAE-EB5C-48BA-A9BE-3DF58E385570}.Release|x86.Build.0 = Release|Any CPU
+		{BF1B7B71-4729-402F-9271-8DDF3D1A5FB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF1B7B71-4729-402F-9271-8DDF3D1A5FB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF1B7B71-4729-402F-9271-8DDF3D1A5FB0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BF1B7B71-4729-402F-9271-8DDF3D1A5FB0}.Debug|x86.Build.0 = Debug|Any CPU
+		{BF1B7B71-4729-402F-9271-8DDF3D1A5FB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF1B7B71-4729-402F-9271-8DDF3D1A5FB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF1B7B71-4729-402F-9271-8DDF3D1A5FB0}.Release|x86.ActiveCfg = Release|Any CPU
+		{BF1B7B71-4729-402F-9271-8DDF3D1A5FB0}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
